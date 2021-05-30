@@ -4,19 +4,49 @@
 \alias{grid_stack_item}
 \title{Grid Stack Item}
 \usage{
-grid_stack_item(..., height = 4, width = 4, x = 0, y = 0)
+grid_stack_item(
+  ...,
+  autoPosition = "",
+  x = "",
+  y = "",
+  w = "",
+  h = "",
+  maxW = "",
+  minW = "",
+  maxH = "",
+  minH = "",
+  locked = "",
+  noResize = "",
+  noMove = "",
+  resizeHandles = ""
+)
 }
 \arguments{
 \item{...}{content to include in the grid stack item}
 
-\item{height}{the height in rows}
+\item{autoPosition}{tells to ignore x and y attributes and to place element to the first
+available position. Having either one missing will also do that}
 
-\item{width}{the width in columns usually 1-12}
+\item{x, y}{element position in column/row.
+Note: if one is missing this will \code{autoPosition} the item}
 
-\item{x}{the x-position}
+\item{w, h}{element size in column/row}
 
-\item{y}{the y-position}
+\item{maxW, minW, maxH, minH}{element constraints in column/row (default none)}
+
+\item{locked}{means another widget wouldn't be able to move it during dragging or resizing.
+The widget can still be dragged or resized by the user.
+You need to add \code{noResize} and \code{noMove} attributes to completely lock the widget.}
+
+\item{noResize}{disable element resizing}
+
+\item{noMove}{disable element moving}
+
+\item{resizeHandles}{- widgets can have their own custom resize handles.
+For example 'e,w' will make that particular widget only resize east and west.}
 }
 \description{
 This is a wrapper for the individual items to be displayed in the \link{grid_stack}
+Check the \href{https://github.com/gridstack/gridstack.js/tree/master/doc#item-options}{ gridstack documentation}
+for more information.
 }

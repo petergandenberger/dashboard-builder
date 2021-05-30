@@ -2,5 +2,4 @@
 
 export(grid_stack)
 export(grid_stack_item)
-export(useGridstackeR)
 importFrom(shiny,div)

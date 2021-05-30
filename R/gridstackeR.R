@@ -1,20 +1,3 @@
-#' Set up all Grid Stack
-#'
-#' @description
-#' This function loads all necessary resources.
-#'
-#' @export
-useGridstackeR <- function() {
-  htmltools::htmlDependency(
-    name = "gridstackjs",
-    version = "4.2.3",
-    src = "gridstackjs",
-    script = c("dist/gridstack-h5.js"),
-    stylesheet = "dist/gridstack.min.css",
-    all_files = FALSE
-  )
-}
-
 #' Grid Stack Container
 #'
 #' @description
@@ -31,13 +14,20 @@ useGridstackeR <- function() {
 #' @export
 grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12) {
   tagList(
+    htmltools::htmlDependency(
+      name = "gridstack",
+      version = "4.2.3",
+      package = "dRagon",
+      src = "assets",
+      script = c("gridstackjs/gridstack-h5.js", "gridstackeR.js"),
+      stylesheet = "gridstackjs/gridstack.min.css"
+    ),
     div(
       class = "grid-stack",
       ...
     ),
     shiny::tags$script(
-      paste0("var grid = GridStack.init(", opts, ");
-              grid.column(", ncols, ");")
+      paste0("initGridstackeR(", opts, ", ", ncols, ");")
     )
   )
 }
@@ -46,17 +36,28 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12) {
 #'
 #' @description
 #' This is a wrapper for the individual items to be displayed in the \link{grid_stack}
+#' Check the \href{https://github.com/gridstack/gridstack.js/tree/master/doc#item-options}{ gridstack documentation}
+#' for more information.
 #'
 #' @param ... content to include in the grid stack item
-#' @param w the width in columns usually 1-12
-#' @param h the height in rows
-#' @param x the x-position
-#' @param y the y-position
+#' @param autoPosition tells to ignore x and y attributes and to place element to the first
+#' available position. Having either one missing will also do that
+#' @param x,y element position in column/row.
+#' Note: if one is missing this will \code{autoPosition} the item
+#' @param w,h element size in column/row
+#' @param maxW,minW,maxH,minH element constraints in column/row (default none)
+#' @param locked means another widget wouldn't be able to move it during dragging or resizing.
+#' The widget can still be dragged or resized by the user.
+#' You need to add \code{noResize} and \code{noMove} attributes to completely lock the widget.
+#' @param noResize disable element resizing
+#' @param noMove disable element moving
+#' @param resizeHandles - widgets can have their own custom resize handles.
+#' For example 'e,w' will make that particular widget only resize east and west.
 #'
 #' @importFrom shiny div
 #' @export
 grid_stack_item <- function(...,
-                            autoPosition = '', w = '', h = '', x = '', y = '',
+                            autoPosition = '', x = '', y = '', w = '', h = '',
                             maxW = '', minW = '', maxH = '', minH = '',
                             locked = '', noResize = '', noMove = '', resizeHandles = '') {
   div(

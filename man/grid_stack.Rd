@@ -10,10 +10,10 @@ grid_stack(..., opts = "{cellHeight: 70}", ncols = 12)
 \item{...}{content to include in the container}
 
 \item{opts}{grid options: check
-\href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}}
-
-\item{ncols:}{number of columns for the grid (If you need > 12 columns you need to generate the CSS manually)
+\href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}
 for more details}
+
+\item{ncols:}{number of columns for the grid (If you need > 12 columns you need to generate the CSS manually)}
 }
 \description{
 This acts as a container for the \link{grid_stack_item}'s.

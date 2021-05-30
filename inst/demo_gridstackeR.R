@@ -1,12 +1,13 @@
 library(dRagon)
 library(shiny)
+library(shinydashboard)
 
 
-ui <- function() {
-  tagList(
-    # setup
-    useGridstackeR(),
-
+ui <- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody(
+    tags$style(".col-sm-12{height:100%;}"),
     #grid layout
     grid_stack(
       grid_stack_item(
@@ -19,7 +20,7 @@ ui <- function() {
       )
     )
   )
-}
+)
 
 server <- function(input, output) {
   output$distPlot <- renderPlot({
@@ -36,3 +37,4 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+
