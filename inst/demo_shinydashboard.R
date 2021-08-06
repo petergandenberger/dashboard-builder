@@ -1,12 +1,14 @@
 library(dRagon)
 library(shiny)
 library(shinydashboard)
+library(shinyjs)
 
 
 ui <- dashboardPage(
   dashboardHeader(),
   dashboardSidebar(),
   dashboardBody(
+    useShinyjs(),
     # make sure the content fills the given height
     tags$style(".grid-stack-item-content .col-sm-12{height:100%;}"),
     grid_stack(
@@ -40,7 +42,7 @@ server <- function(input, output, session) {
          xlab = "Waiting time to next eruption (in mins)",
          main = "Histogram of waiting times")
 
-  }, height = function() {max(input$plot_container_height, 280) - 80}
+  }, height = function() {max(input$plot_container_height - 80, 200)}
   )
 
 }
