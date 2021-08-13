@@ -1,0 +1,145 @@
+div.spread3evenly > div {
+    display: inline-block;
+    *display: inline; /* For IE7 */
+    zoom: 1; /* Trigger hasLayout */
+    width: 33%;
+    float: left;
+    margin: 0;
+}
+
+div.spread3evenly {
+  width: 100%;  
+  margin-left: 15px;
+}
+
+.img-circle {
+  border-radius: 0 !important;
+}
+
+.col-sm-6, .col-sm-2, .col-sm-8 {
+  padding: 10px;
+}
+
+/* dropdowns */
+.var-dropdown {
+  margin-right: 15px;
+}
+
+
+/* Map Rules */
+.leaflet-container {background: #fff; height: 100%}
+
+/* workaround for the NA in leaflet legend see https://github.com/rstudio/leaflet/issues/615 */
+.leaflet-control div:last-child {clear: both;}
+ 
+/* increase z-index for dropdowns to make sure they are above the map controls (see #7) */  
+.dropdown-menu {z-index: 1001;}     
+
+/* make sure all boxs take as much space as they can, so they all line up at the bottom */
+.box {
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgb(0 0 0 / 30%);
+}
+
+.row {
+  display: flex;
+  margin:0 !important;
+}
+
+.box-body {
+    padding: 15px;
+}
+
+/* remove headers from all boxs */
+.box-header {
+  height: 0;
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+} 
+
+/* syles for the user card on the top left */
+.card-hexagon {
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-hexagon-title {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 100px;
+  font-size: 25px;
+  font-weight: 300;
+  color: white;
+}
+
+.card-hexagon img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100px;
+    float: left;
+    padding: 5px;
+}
+
+.card-hexagon i {
+  font-size: 15px;
+  font-weight: 510;
+}
+
+.top-row > .col-sm-2:first-child > .box{
+  background-color: #08306B;
+}
+
+.top-row > .col-sm-2:last-child > .box{
+  background-color: #6dcc5a;
+}
+
+.top-row label {
+  letter-spacing: .08em;
+  font-weight: 500 !important;
+}
+
+.healthdown-button {
+  border: 2px solid #08306B;
+  color: #000;
+  border-radius: 5px;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: white;
+}
+
+.learn-more {
+  width: 60%;
+  font-size:14px;
+  padding: 10px;
+}
+
+.learn-more:hover {
+  background-color: #08306B;
+  color: #fff;
+}
+
+.shiny-output-error {
+  margin-top: 20%;
+  letter-spacing: .08em;
+  text-align: center;
+  width: 100%;
+}
+
+
+
+/* drill arrows */
+.drill-button {
+  margin-bottom: 10px;
+  font-size: 10px;
+  padding: 5px;
+}
