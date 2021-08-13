@@ -28,7 +28,10 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12) {
     ),
     shiny::tags$script(
       paste0("initGridstackeR(", opts, ", ", ncols, ");")
-    )
+    ),
+    useShinyjs(),
+    extendShinyjs(functions = c("add_grid_stack_item"),
+      text = "shinyjs.add_grid_stack_item = function(grid_stack_item){addGridStackItem(grid_stack_item);}")
   )
 }
 
