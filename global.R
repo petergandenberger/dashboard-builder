@@ -3,6 +3,7 @@ library(shinyjs)
 library(gridstackeR)
 library(ggplot2)
 library(esquisse)
+library(dplyr)
 
 
 # resources -----------------------------------------------------------------

@@ -18,13 +18,16 @@ ui <- function() {
         div(
           style = "margin: 0 20px;",
           actionButton("add_element", "Add Element", 
-                       style = "margin-top: 50%; transform: translateY(-50%);", 
-                       class = "healthdown-button")
+                       class = "menu-button"),
+          actionButton("save_layout", "Save Layout", 
+                       class = "menu-button"),
+          actionButton("load_layout", "Load Layout",  
+                       class = "menu-button")
         )
       )
     ),
     tags$hr(),
-    div(class = "modal", id = "esquisseModal",
+    div(class = "box_edit_modal", id = "esquisseModal",
       esquisse_ui(
         id = "esquisse", 
         controls = c("labs", "parameters", "appearance", "filters"),

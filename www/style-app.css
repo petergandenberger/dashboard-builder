@@ -11,9 +11,15 @@
   align-items: center;
 }
 
+.menu-button {
+  float: right; 
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
 
 /* overlay */
-.modal {
+.box_edit_modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
