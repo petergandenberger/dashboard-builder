@@ -29,13 +29,13 @@ ui <- function() {
     tags$hr(),
     div(class = "box_edit_modal", id = "esquisseModal",
       esquisse_ui(
-        id = "esquisse", 
+        id = "esquissea", 
         controls = c("labs", "parameters", "appearance", "filters"),
         header = FALSE # dont display gadget title
       ),
       div(
-        actionButton("close_modal", "Close"),
-        actionButton("save_modal", "Save"),
+        actionButton("close_modala", "Close"),
+        actionButton("save_modala", "Save"),
         style = "width: 80%; margin-left: 10%;"
       )
     ),

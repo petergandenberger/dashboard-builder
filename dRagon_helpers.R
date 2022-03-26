@@ -1,4 +1,8 @@
-render_plot <- function(output, code, target) {
+render_plot <- function(output, code, target, pre_code = NULL) {
+  if(!is.null(pre_code)) {
+    code <- paste0(pre_code, "\n", code)
+  }
+  
   x <-  {eval(parse(text = code))}
   output[[target]] <- renderPlot(x)
 }

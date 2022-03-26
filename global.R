@@ -4,6 +4,7 @@ library(gridstackeR)
 library(ggplot2)
 library(esquisse)
 library(dplyr)
+library(shinydashboard)
 
 
 # resources -----------------------------------------------------------------

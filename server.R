@@ -16,24 +16,56 @@ server <- function(input, output, session) {
     rvs$current_id <- rvs$current_id + 1
   })
   
+  editBoxModal <- function() {
+    modalDialog(
+      tabBox(
+        width = 12,
+        # The id lets us use input$tabset1 on the server to find the current tab
+        id = "tabset1",
+        tabPanel("Graph", 
+                 esquisse_ui(
+                    id = "esquisse", 
+                    controls = c("labs", "parameters", "appearance", "filters"),
+                    header = FALSE
+                  )
+        ),
+        tabPanel("R Code", textAreaInput("rcode", "R-Code"))
+      ),
+      footer = tagList(
+        #checkboxInput("run_code_before_plot", "Run R-Code before plotting"),
+        modalButton("Cancel"),
+        actionButton("edit_layout_ok", "Load")
+      ),
+      size = "l"
+    )
+  }
+  
+  observeEvent(input$run_code_before_plot, {
+    
+  })
+  
   observeEvent(input$open_modal, {
-    shinyjs::show("esquisseModal")
+    showModal(editBoxModal())
   })
   
   observeEvent(input$load_layout, {
     showModal(loadLayoutModal())
   })
   
-  observeEvent(input$save_modal, {
+  observeEvent(input$edit_layout_ok, {
+    run_code_before_plot <- TRUE
     if(!is.null(results$code_plot)) {
-      render_plot(output, results$code_plot, target = input$open_modal)
-      rvs$elements[paste0("plot_", rvs$elements$element_id) == input$open_modal, "element_code"] <- results$code_plot
+      if(run_code_before_plot && input$rcode != "") {
+        render_plot(output, results$code_plot, target = input$open_modal, input$rcode)
+      } else {
+        render_plot(output, results$code_plot, target = input$open_modal)
+        rvs$elements[paste0("plot_", rvs$elements$element_id) == input$open_modal, "element_code"] <- results$code_plot
+      }
+    } else if(input$rcode != "") {
+      render_plot(output, input$rcode, target = input$open_modal)
+      rvs$elements[paste0("plot_", rvs$elements$element_id) == input$open_modal, "element_code"] <- input$rcode
     }
-    shinyjs::hide("esquisseModal")
-  })
-  
-  observeEvent(input$close_modal, {
-    shinyjs::hide("esquisseModal")
+    removeModal()
   })
   
   observeEvent(input$save_layout, {
@@ -95,5 +127,4 @@ server <- function(input, output, session) {
     rvs$current_id <- max(rvs$elements$element_id) + 1
     removeModal()
   })
-  
 }

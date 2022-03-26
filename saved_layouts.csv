@@ -71,3 +71,30 @@
  geom_point(shape = ""circle"") +
  scale_color_distiller(palette = ""Set1"", direction = 1) +
  theme_minimal()"
+"layout5";5;6;"c_1";"<button class = ""settings"" id = ""btn_1"" data-target = ""plot_1"" onclick = ""openModal(this.dataset.target)""><i class=""fa fa-cog""></button>";0;0;2;"ggplot(mtcars) +
+ aes(x = mpg, y = hp) +
+ geom_point(shape = ""circle"", size = 1.5, colour = ""#112446"") +
+ theme_minimal()"
+"layout5";3;3;"c_2";"<button class = ""settings"" id = ""btn_2"" data-target = ""plot_2"" onclick = ""openModal(this.dataset.target)""><i class=""fa fa-cog""></button>";5;0;1;"ggplot(mtcars) +
+ aes(x = mpg) +
+ geom_histogram(bins = 30L, fill = ""#112446"") +
+ theme_minimal()"
+"layout5";3;3;"c_5";"<button class = ""settings"" id = ""btn_5"" data-target = ""plot_5"" onclick = ""openModal(this.dataset.target)""><i class=""fa fa-cog""></button>";8;0;3;"ggplot(mtcars) +
+ aes(x = mpg) +
+ geom_histogram(bins = 10L, fill = ""#112446"") +
+ theme_minimal()"
+"layout5";6;5;"c_4";"<button class = ""settings"" id = ""btn_4"" data-target = ""plot_4"" onclick = ""openModal(this.dataset.target)""><i class=""fa fa-cog""></button>";5;3;4;"ggplot(mtcars) +
+ aes(x = mpg, y = drat, colour = gear, size = disp) +
+ geom_point(shape = ""circle"") +
+ scale_color_distiller(palette = ""Set1"", direction = 1) +
+ theme_minimal()"
+"layout5";5;6;"c_3";"<button class = ""settings"" id = ""btn_3"" data-target = ""plot_3"" onclick = ""openModal(this.dataset.target)""><i class=""fa fa-cog""></button>";0;6;5;"ggplot(mtcars) +
+ aes(x = mpg, y = hp, colour = am, size = gear) +
+ geom_point(shape = ""circle"") +
+ scale_color_gradient() +
+ theme_minimal()"
+"layout5";3;4;"c_6";"<button class = ""settings"" id = ""btn_6"" data-target = ""plot_6"" onclick = ""openModal(this.dataset.target)""><i class=""fa fa-cog""></button>";5;8;6;"ggplot(mtcars) +
+ aes(x = mpg, y = hp, colour = am, size = gear) +
+ geom_point(shape = ""circle"") +
+ scale_color_gradient() +
+ theme_minimal()"
