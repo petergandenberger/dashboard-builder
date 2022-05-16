@@ -3,18 +3,33 @@
 library(shiny)
 library(shinyjs)
 library(gridstackeR)
-library(ggplot2)
-library(esquisse)
-library(dplyr)
+library(R6)
 library(shinydashboard)
-library(shinyAce)
-library(checkmate)
-library(emojifont)
+library(storr)
+library(esquisse)
+library(ggplot2)
+library(bs4Dash)
+library(tidyr)
+library(dplyr)
 
 
 # resources -----------------------------------------------------------------
 source("ui.R")
 source("server.R")
-source("dRagon_helpers.R")
 
-shinyApp(ui(), server)
+source("elements/dRagonElement.R")
+source("elements/dRagonElementBuilder.R")
+
+
+source("elements/TextElementBuilder.R")
+source("elements/NumberElementBuilder.R")
+source("elements/GGPlotElementBuilder.R")
+source("elements/ValueboxElementBuilder.R")
+source("elements/DataTableElementBuilder.R")
+
+
+source("helpers/element_helpers.R")
+source("helpers/element_builder_modal.R")
+source("helpers/export_dashboard.R")
+
+shinyApp(ui, server)

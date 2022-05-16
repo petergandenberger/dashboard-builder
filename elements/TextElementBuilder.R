@@ -2,7 +2,7 @@ TextElementBuilder <- R6::R6Class("TextElementBuilder",
   inherit = dRagonElementBuilder,                               
   public = list(
     initialize = function(dataset) {
-      private$.elementBuilder_name = "TextElement"
+      private$.elementBuilder_name = "Text"
       super$initialize(dataset)
     },
     
@@ -19,7 +19,7 @@ TextElementBuilder <- R6::R6Class("TextElementBuilder",
     build_element = function (input) {
       code_element <- paste0('"', input$textElementBuilder_textInput, '"')
       if(is.null(private$dRagonElement)) {
-        element_name <- paste0(round(runif(1) * 10000000, 0))
+        element_name <- paste0("txt_", round(runif(1) * 10000000, 0))
         builder_class <- "TextElementBuilder"
         
         code_preprocessing <- NULL

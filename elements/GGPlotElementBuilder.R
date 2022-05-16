@@ -5,7 +5,7 @@ GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
   ),
   public = list(
     initialize = function(dataset) {
-      private$.elementBuilder_name = "GGplotElement"
+      private$.elementBuilder_name = "GGplot"
       super$initialize(dataset)
     },
     
@@ -31,7 +31,7 @@ GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
       code_element <- private$ggplot_results$code_plot
       
       if(is.null(private$dRagonElement)) {
-        element_name <- paste0(round(runif(1) * 10000000, 0))
+        element_name <- paste0("plot_", round(runif(1) * 10000000, 0))
         builder_class <- "GGPlotElementBuilder"
         
         code_preprocessing <- NULL

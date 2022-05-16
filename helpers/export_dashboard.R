@@ -30,7 +30,7 @@ export_dashboard <- function(input, st, saved_layout) {
     }
     
     elements_server <- paste0(elements_server, '
-    output[["', element$element_name, '"]] <- ', element$renderFunction_name, '({', 
+    output$', element$element_name, ' <- ', element$renderFunction_name, '({', 
     code, '
     })'
     )

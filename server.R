@@ -1,149 +1,83 @@
 server <- function(input, output, session) {
-  mapdata <<- readRDS("mapdata.RDS")
-  covid <<- readRDS("covid.RDS")
+  elementBuilder_list <- list(TextElementBuilder$new(mtcars),
+                              ValueboxElementBuilder$new(mtcars), 
+                              DataTableElementBuilder$new(mtcars),
+                              GGPlotElementBuilder$new(mtcars))
+  path <- tempfile("storr_")
+  st <- storr::storr_rds(path)
   
-  layouts <- read.csv2("saved_layouts.csv", stringsAsFactors = FALSE)
-  rvs <- reactiveValues(elements = data.frame(element_id = character(0), element_code = character(0)),
-                        current_id = 1)
-  
-  data_r <- reactiveValues(data = covid, name = "covid")
-  
-  results <- esquisse_server(
-    id = "esquisse"
-    #,data_rv = data_r
-  )
-  
-  observeEvent(input$add_element, {
-    add_element(rvs$current_id)
-    rvs$elements <- rbind(rvs$elements, list(element_id = rvs$current_id, element_code = ""), stringsAsFactors = F)
-    rvs$current_id <- rvs$current_id + 1
+  observeEvent(input$deleteElement, {
+    delete_element(input$deleteElement, st)
   })
   
-  editBoxModal <- function() {
-    modalDialog(
-      tabBox(
-        width = 12,
-        # The id lets us use input$tabset1 on the server to find the current tab
-        id = "tabset1",
-        tabPanel("Graph", 
-                 esquisse_ui(
-                    id = "esquisse", 
-                    controls = c("labs", "parameters", "appearance", "filters"),
-                    header = FALSE
-                  )
-        ),
-        tabPanel("R Code", 
-                 aceEditor(
-                   outputId = "rcode",
-                   fontSize = 15,
-                   theme = 'chrome',
-                   mode = 'r',
-                   placeholder = "Write R-code that creates a plot OR some pre-processing that is run before the esquisser-plot"
-                 )),
-      ),
-      footer = tagList(
-        checkboxInput("run_code_before_plot", "Run R-Code before plotting"),
-        modalButton("Cancel"),
-        actionButton("edit_layout_ok", "Load")
-      ),
-      size = "l"
-    )
-  }
-  
-  observeEvent(input$run_code_before_plot, {
-    
-  })
-  
-  observeEvent(input$open_modal, {
-    showModal(editBoxModal())
-  })
-  
-  observeEvent(input$load_layout, {
-    showModal(loadLayoutModal())
-  })
-  
-  observeEvent(input$edit_layout_ok, {
-    if(!is.null(results$code_plot)) {
-      if(input$run_code_before_plot && input$rcode != "") {
-        render_plot(output, results$code_plot, target = input$open_modal, input$rcode)
-      } else {
-        render_plot(output, results$code_plot, target = input$open_modal)
-        rvs$elements[paste0("plot_", rvs$elements$element_id) == input$open_modal, "element_code"] <- results$code_plot
-      }
-    } else if(input$rcode != "") {
-      render_plot(output, input$rcode, target = input$open_modal)
-      rvs$elements[paste0("plot_", rvs$elements$element_id) == input$open_modal, "element_code"] <- input$rcode
-    }
-    removeModal()
-  })
-  
-  observeEvent(input$save_layout, {
+  observeEvent(input$export, {
     js$save_grid_stack_layout()
   })
   
   observeEvent(input$saved_layout, {
-    showModal(layoutNameModal())
+    export_dashboard(input, st, input$saved_layout)
+    shinyjs::click("downloadDashboard")
   })
   
-  layoutNameModal <- function(failed = FALSE) {
-    modalDialog(
-      #textInput("new_layout_name", "Layout name",
-      #          placeholder = 'Enter the name for the new layout'
-      #),
-      div(tags$b("Cannot save layouts in online demo (yet)", style = "color: red;")),
-      if (failed)
-        div(tags$b("This name already exists, please try a new one", style = "color: red;")),
-      
-      footer = tagList(
-        modalButton("Cancel"),
-        actionButton("layout_name_ok", "OK")
-      )
-    )
-  }
+  output$downloadDashboard <- downloadHandler(
+    filename = function() {
+      "out/app.R"
+    },
+    content = function(file) {
+      file.copy("out/app.R", file)
+    }
+  )
   
-  observeEvent(input$layout_name_ok, {
-    # Check that data object exists and is data frame.
-    #if (input$new_layout_name %in% unique(layouts$name)) {
-    #  showModal(layoutNameModal(failed = TRUE))
-    #} else {
-    #  new_layout <- jsonlite::fromJSON(input$saved_layout)
-    #  new_layout <- cbind(new_layout, rvs$elements)
-    #  new_layout$name <- input$new_layout_name
-    #  new_layout <- new_layout %>% select(names(layouts))
-    #  layouts <<- rbind(layouts, new_layout)
-    #  write.csv2(layouts, "saved_layouts.csv", row.names = FALSE)
-      removeModal()
-    #}
+  observeEvent(input$add_element, {
+    showModal(element_builder_modal())
+    # create one tab per elementBuilder from the elementBuilder_list
+    first <- TRUE
+    for(elementBuilder in elementBuilder_list) {
+      appendTab(
+        "tabset1",
+        tabPanel(elementBuilder$elementBuilder_name, 
+                 elementBuilder$get_builder_UI()),
+        select = first
+      )
+      first <- FALSE
+    }
+  })
+
+  observeEvent(input$open_modal, {
+    showModal(element_builder_modal())
+    current_element <- st$get(input$open_modal)
+    updateTextInput(session, "element_name", "Element Name", 
+                    current_element$display_name)
+    
+    for(elementBuilder in elementBuilder_list) {
+      if(class(elementBuilder)[1] == current_element$builder_class) {
+        elementBuilder$load_element(current_element, session)
+        appendTab(
+          "tabset1",
+          tabPanel(elementBuilder$elementBuilder_name, 
+                   elementBuilder$get_builder_UI()),
+          select = class(elementBuilder)[1] == current_element$builder_class
+        )
+        break
+      }
+    }
   })
   
-  loadLayoutModal <- function() {
-    modalDialog(
-      selectInput("select_load_layout", "Load Layout", choices = unique(layouts$name)),
-      footer = tagList(
-        modalButton("Cancel"),
-        actionButton("layout_load_ok", "Load")
-      )
-    )
-  }
-  
-  observeEvent(input$layout_load_ok, {
-    removeUI(
-      selector = paste0(".grid-stack-item"),
-      multiple = TRUE,
-      immediate = TRUE
-    )
-    layout <- layouts %>% filter(name == input$select_load_layout)
-    rvs$elements <- load_layout(layout, output)
-    rvs$current_id <- max(rvs$elements$element_id) + 1
+  observeEvent(input$edit_layout_ok, {
+    #find active tab
+    for(elementBuilder in elementBuilder_list) {
+      if(elementBuilder$elementBuilder_name == input$tabset1) {
+        element <- elementBuilder$build_element(input)
+        element$display_name <- input$element_name
+        # check if element already exists
+        if(!st$exists(element$element_name)) {
+          add_element(element)
+        }
+        render_element(input, output, element)
+        st$set(element$element_name, element)
+        break
+      } 
+    }
     removeModal()
   })
-  
-  observeEvent(input$new_layout, {
-    removeUI(
-      selector = paste0(".grid-stack-item"),
-      multiple = TRUE,
-      immediate = TRUE
-    )
-  })
-  
 }

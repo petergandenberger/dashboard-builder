@@ -2,14 +2,15 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
   inherit = dRagonElementBuilder,                               
   public = list(
     initialize = function(dataset) {
-      private$.elementBuilder_name = "DataTableElement"
+      private$.elementBuilder_name = "DataTable"
       super$initialize(dataset)
     },
     
     get_builder_UI = function () {
       ui <- div()
       if(!is.null(private$dataset)) {
-        ui <- selectInput("dataTableElementBuilder_vars", "Select vars for the Columns", names(private$dataset), multiple = TRUE)
+        ui <- selectInput("dataTableElementBuilder_vars", "Select vars for the Columns", 
+                          names(private$dataset), multiple = TRUE)
       } else {
         ui <- div("No dataset available")
       }
@@ -19,8 +20,8 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
     load_element = function(dRagonElement, session) {
       # set slider to saved number 
       private$dRagonElement <- dRagonElement
-      updateSelectInput("dataTableElementBuilder_vars", "Select vars for the Columns", names(private$dataset), 
-                        selected = dRagonElement$inner_state$vars)
+      updateSelectInput(session, "dataTableElementBuilder_vars", "Select vars for the Columns", 
+                        names(private$dataset), selected = dRagonElement$inner_state$vars)
     },
     
     build_element = function (input) {
@@ -28,7 +29,7 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
       col2 <- input$dataTableElementBuilder_col2
       
       if(is.null(private$dRagonElement)) {
-        element_name <- paste0(round(runif(1) * 10000000, 0))
+        element_name <- paste0("dt_", round(runif(1) * 10000000, 0))
         builder_class <- "DataTableElementBuilder"
         
         code_preprocessing <- paste0("data <- mtcars %>% select(", paste(input$dataTableElementBuilder_vars, collapse = ", "), ")")

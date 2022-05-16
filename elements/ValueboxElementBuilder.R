@@ -2,7 +2,7 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
   inherit = dRagonElementBuilder,                               
   public = list(
     initialize = function(dataset) {
-      private$.elementBuilder_name = "ValueboxElementBuilder"
+      private$.elementBuilder_name = "Valuebox"
       super$initialize(dataset)
     },
     
@@ -31,7 +31,7 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
       code_element <- paste0('bs4Dash::bs4ValueBox(
             "', title, '", ', value, ', icon = icon("', icon, '"), width = 12)')
       if(is.null(private$dRagonElement)) {
-        element_name <- paste0(round(runif(1) * 10000000, 0))
+        element_name <- paste0("vb_", round(runif(1) * 10000000, 0))
         builder_class <- "ValueboxElementBuilder"
         
         code_preprocessing <- NULL

@@ -1,47 +1,37 @@
-ui <- function() {
-  tagList(
-    tags$head(
-      tags$link(rel = "stylesheet", type = "text/css", href = "style-app.css"),
-      tags$link(rel = "stylesheet", type = "text/css", href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
-    ),
-    # we need shinyjs for the leafdown map
+ui <- dashboardPage(
+  title = "Dashboard-Builder Demo",
+  dashboardHeader(),
+  dashboardSidebar(disable = TRUE),
+  dashboardBody(
     useShinyjs(),
+    tags$link(rel = "stylesheet", type = "text/css", href = "style-app.css"),
+    
+    
+    tags$style(".dataTables_scroll {height: calc(100% - 100px);}
+                .dataTables_wrapper {height: 100%;}
+                .datatables {height: 100%!important; overflow: scroll;}"),
+    
+    
+    tags$style("#element_name {margin-bottom: 25px;}"),
+    tags$style(".grid-stack-item-content .col-sm-12 {height: 100%;}"),
+    tags$style(".bs4Dash.card {height: calc(100% - 10px);}"),
+    tags$style(".small-box {height: calc(100% - 10px);}"),
+    tags$style(".small-box .inner {height: calc(100% - 10px);}"),
+    tags$style(".grid-stack-item-content {height:100%; overflow:hidden!important;}"),
     tags$script("function openModal(id) {
                 Shiny.setInputValue('open_modal', id, {priority: 'event'});
     }"),
-    # ---- header
-    tags$header(
-      class = "site-header",
-      div(
-        style = "padding: 0 20px;",
-        class="wrapper site-header__wrapper",
-        div(
-          style = "margin: 0 20px;",
-          actionButton("add_element", "Add Element", 
-                       class = "menu-button"),
-          actionButton("save_layout", "Save Layout", 
-                       class = "menu-button"),
-          actionButton("load_layout", "Load Layout",  
-                       class = "menu-button"),
-          actionButton("new_layout", "New Layout",  
-                       class = "menu-button")
-        )
-      )
-    ),
+    tags$script("function deleteElement(id) {
+                Shiny.setInputValue('deleteElement', id, {priority: 'event'});
+    }"),
+    actionButton("add_element", "Add Element", style = "margin-top: 25px"),
+    actionButton("export", "Export", style = "margin-top: 25px"),
+    downloadButton("downloadDashboard", "Download", style = "visibility: hidden;"),
     tags$hr(),
-    div(class = "box_edit_modal", id = "esquisseModal",
-      esquisse_ui(
-        id = "esquissea", 
-        controls = c("labs", "parameters", "appearance", "filters"),
-        header = FALSE # dont display gadget title
-      ),
-      div(
-        actionButton("close_modala", "Close"),
-        actionButton("save_modala", "Save"),
-        style = "width: 80%; margin-left: 10%;"
-      )
-    ),
     # ---- second row
     grid_stack(dynamic_full_window_height = TRUE, height_offset = 50)
-  )
-}
+  )            
+)
+
+
+

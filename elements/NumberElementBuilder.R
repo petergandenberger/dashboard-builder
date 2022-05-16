@@ -2,7 +2,7 @@ NumberElementBuilder <- R6::R6Class("NumberElementBuilder",
   inherit = dRagonElementBuilder,                               
   public = list(
     initialize = function(dataset) {
-      private$.elementBuilder_name = "NumberElement"
+      private$.elementBuilder_name = "Number"
       super$initialize(dataset)
     },
     
