@@ -1,13 +1,16 @@
 server <- function(input, output, session) {
+  mapdata <<- readRDS("mapdata.RDS")
+  covid <<- readRDS("covid.RDS")
+  
   layouts <- read.csv2("saved_layouts.csv", stringsAsFactors = FALSE)
   rvs <- reactiveValues(elements = data.frame(element_id = character(0), element_code = character(0)),
                         current_id = 1)
   
-  data_r <- reactiveValues(data = mtcars, name = "mtcars")
+  data_r <- reactiveValues(data = covid, name = "covid")
   
   results <- esquisse_server(
-    id = "esquisse",
-    data_rv = data_r
+    id = "esquisse"
+    #,data_rv = data_r
   )
   
   observeEvent(input$add_element, {
@@ -29,10 +32,17 @@ server <- function(input, output, session) {
                     header = FALSE
                   )
         ),
-        tabPanel("R Code", textAreaInput("rcode", "R-Code"))
+        tabPanel("R Code", 
+                 aceEditor(
+                   outputId = "rcode",
+                   fontSize = 15,
+                   theme = 'chrome',
+                   mode = 'r',
+                   placeholder = "Write R-code that creates a plot OR some pre-processing that is run before the esquisser-plot"
+                 )),
       ),
       footer = tagList(
-        #checkboxInput("run_code_before_plot", "Run R-Code before plotting"),
+        checkboxInput("run_code_before_plot", "Run R-Code before plotting"),
         modalButton("Cancel"),
         actionButton("edit_layout_ok", "Load")
       ),
@@ -53,9 +63,8 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$edit_layout_ok, {
-    run_code_before_plot <- TRUE
     if(!is.null(results$code_plot)) {
-      if(run_code_before_plot && input$rcode != "") {
+      if(input$run_code_before_plot && input$rcode != "") {
         render_plot(output, results$code_plot, target = input$open_modal, input$rcode)
       } else {
         render_plot(output, results$code_plot, target = input$open_modal)
@@ -78,9 +87,10 @@ server <- function(input, output, session) {
   
   layoutNameModal <- function(failed = FALSE) {
     modalDialog(
-      textInput("new_layout_name", "Layout name",
-                placeholder = 'Enter the name for the new layout'
-      ),
+      #textInput("new_layout_name", "Layout name",
+      #          placeholder = 'Enter the name for the new layout'
+      #),
+      div(tags$b("Cannot save layouts in online demo (yet)", style = "color: red;")),
       if (failed)
         div(tags$b("This name already exists, please try a new one", style = "color: red;")),
       
@@ -93,17 +103,17 @@ server <- function(input, output, session) {
   
   observeEvent(input$layout_name_ok, {
     # Check that data object exists and is data frame.
-    if (input$new_layout_name %in% unique(layouts$name)) {
-      showModal(layoutNameModal(failed = TRUE))
-    } else {
-      new_layout <- jsonlite::fromJSON(input$saved_layout)
-      new_layout <- cbind(new_layout, rvs$elements)
-      new_layout$name <- input$new_layout_name
-      new_layout <- new_layout %>% select(names(layouts))
-      layouts <<- rbind(layouts, new_layout)
-      write.csv2(layouts, "saved_layouts.csv", row.names = FALSE)
+    #if (input$new_layout_name %in% unique(layouts$name)) {
+    #  showModal(layoutNameModal(failed = TRUE))
+    #} else {
+    #  new_layout <- jsonlite::fromJSON(input$saved_layout)
+    #  new_layout <- cbind(new_layout, rvs$elements)
+    #  new_layout$name <- input$new_layout_name
+    #  new_layout <- new_layout %>% select(names(layouts))
+    #  layouts <<- rbind(layouts, new_layout)
+    #  write.csv2(layouts, "saved_layouts.csv", row.names = FALSE)
       removeModal()
-    }
+    #}
   })
   
   loadLayoutModal <- function() {
@@ -127,4 +137,13 @@ server <- function(input, output, session) {
     rvs$current_id <- max(rvs$elements$element_id) + 1
     removeModal()
   })
+  
+  observeEvent(input$new_layout, {
+    removeUI(
+      selector = paste0(".grid-stack-item"),
+      multiple = TRUE,
+      immediate = TRUE
+    )
+  })
+  
 }

@@ -22,6 +22,8 @@ ui <- function() {
           actionButton("save_layout", "Save Layout", 
                        class = "menu-button"),
           actionButton("load_layout", "Load Layout",  
+                       class = "menu-button"),
+          actionButton("new_layout", "New Layout",  
                        class = "menu-button")
         )
       )
@@ -40,6 +42,6 @@ ui <- function() {
       )
     ),
     # ---- second row
-    grid_stack()
+    grid_stack(dynamic_full_window_height = TRUE, height_offset = 50)
   )
 }
