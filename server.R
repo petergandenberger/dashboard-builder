@@ -45,18 +45,21 @@ server <- function(input, output, session) {
   )
   
   observeEvent(input$add_element, {
-    req(!is.na(elementBuilder_list))
-    showModal(element_builder_modal())
-    # create one tab per elementBuilder from the elementBuilder_list
-    first <- TRUE
-    for(elementBuilder in elementBuilder_list) {
-      appendTab(
-        "tabset1",
-        tabPanel(elementBuilder$elementBuilder_name, 
-                 elementBuilder$get_builder_UI()),
-        select = first
-      )
-      first <- FALSE
+    if(is.null(elementBuilder_list)) {
+      shinyalert("No Dataset available", "Please add some data first!", type = "error")
+    } else{
+      showModal(element_builder_modal())
+      # create one tab per elementBuilder from the elementBuilder_list
+      first <- TRUE
+      for(elementBuilder in elementBuilder_list) {
+        appendTab(
+          "tabset1",
+          tabPanel(elementBuilder$elementBuilder_name, 
+                   elementBuilder$get_builder_UI()),
+          select = first
+        )
+        first <- FALSE
+      }
     }
   })
 
