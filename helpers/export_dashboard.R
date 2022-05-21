@@ -81,7 +81,7 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output, session) {
-  data <- read.csv("data.csv")
+  dat <- read.csv("data.csv")
   ', elements_server, '
 }
 
