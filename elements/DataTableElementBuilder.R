@@ -32,10 +32,10 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
         element_name <- paste0("dt_", round(runif(1) * 10000000, 0))
         builder_class <- "DataTableElementBuilder"
         
-        code_preprocessing <- paste0("data <- mtcars %>% select(", paste(input$dataTableElementBuilder_vars, collapse = ", "), ")")
+        code_preprocessing <- paste0("print(dat)\ndata_selected <- dat %>% select(", paste(input$dataTableElementBuilder_vars, collapse = ", "), ")")
         
         
-        code_element <- paste0('DT::datatable(data, options = list(paging = FALSE, searching = FALSE))')
+        code_element <- paste0('DT::datatable(data_selected, options = list(paging = FALSE, searching = FALSE))')
         
         
         uiOutput <- DT::dataTableOutput(outputId = element_name)

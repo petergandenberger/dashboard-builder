@@ -10,7 +10,7 @@ GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
     },
     
     get_builder_UI = function () {
-      data_rv <- reactiveValues(data = private$dataset, name = "mtcars")
+      data_rv <- reactiveValues(data = private$dataset, name = "dat")
       private$ggplot_results <- esquisse_server(
         id = "esquisse", data_rv = data_rv
       )

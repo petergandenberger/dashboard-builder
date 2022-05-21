@@ -11,6 +11,8 @@ library(ggplot2)
 library(bs4Dash)
 library(tidyr)
 library(dplyr)
+library(styler)
+library(datamods)
 
 
 # resources -----------------------------------------------------------------

@@ -1,4 +1,7 @@
-export_dashboard <- function(input, st, saved_layout) {
+export_dashboard <- function(input, st, saved_layout, data) {
+  dir.create("out")
+  write.csv(data, "out/data.csv")
+  
   grid_stack_items <- jsonify::from_json(saved_layout)
   elements <- st$list()
   
@@ -7,14 +10,21 @@ export_dashboard <- function(input, st, saved_layout) {
     element <- st$get(e)
     item <- grid_stack_items[grid_stack_items$id == paste0("c_", element$element_name), ]
     
+    
+    if(element$add_bounding_box) {
+      content <- paste0('box(
+          title = "', element$display_name, '", status = "primary", solidHeader = TRUE, width = 12, 
+          height = "100%", collapsible = F,
+          ', element$uiOutput_name, ')')
+    } else {
+      content <- element$uiOutput_name
+    }
+    
     elements_ui <- paste0(elements_ui, '
     grid_stack_item(
         h = ', item$h, ', w = ', item$w, ', x = ', item$x, ', y = ', item$y, 
-        ', id = "c_', element$element_name, '", style = "overflow:hidden",
-        box(
-          title = "', element$display_name, '", status = "primary", solidHeader = TRUE, width = 12, height = "100%",
-          ', element$uiOutput_name, ')
-      ),'
+        ', id = "c_', element$element_name, '", style = "overflow:hidden",',
+        content, '),'
     )
   }
   # remove last comma
@@ -48,7 +58,7 @@ library(dplyr)
 
 
 ui <- dashboardPage(
-  title = "gridstackeR Demo",
+  title = "Dashboard-Builder Demo",
   dashboardHeader(),
   dashboardSidebar(disable = TRUE),
   dashboardBody(
@@ -71,11 +81,14 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output, session) {
+  data <- read.csv("data.csv")
   ', elements_server, '
 }
 
 shinyApp(ui, server)
 ')
 write(file, file = "out/app.R")
+styler::style_file("out/app.R")
+zip(zipfile = 'out/dashboard', files = c('out/data.csv', "out/app.R"))
 print("done")
 }

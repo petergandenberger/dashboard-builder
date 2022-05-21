@@ -26,6 +26,7 @@ ui <- dashboardPage(
     }"),
     actionButton("add_element", "Add Element", style = "margin-top: 25px"),
     actionButton("export", "Export", style = "margin-top: 25px"),
+    actionButton("import_data", "Import Data", style = "margin-top: 25px"),
     downloadButton("downloadDashboard", "Download", style = "visibility: hidden;"),
     tags$hr(),
     # ---- second row

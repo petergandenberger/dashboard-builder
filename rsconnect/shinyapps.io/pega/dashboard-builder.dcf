@@ -1,0 +1,13 @@
+name: dashboard-builder
+title: dashboard-builder
+username:
+account: pega
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5945062
+bundleId: 5926320
+url: https://pega.shinyapps.io/dashboard-builder/
+when: 1653039567.03255
+lastSyncTime: 1653039567.03255
+asMultiple: FALSE
+asStatic: FALSE
