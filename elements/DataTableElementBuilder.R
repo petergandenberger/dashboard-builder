@@ -28,14 +28,14 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
       col1 <- input$dataTableElementBuilder_col1
       col2 <- input$dataTableElementBuilder_col2
       
+      code_element <- paste0('DT::datatable(data_selected, options = list(paging = FALSE, searching = FALSE))')
+      code_preprocessing <- paste0("print(dat)\ndata_selected <- dat %>% select(", paste(input$dataTableElementBuilder_vars, collapse = ", "), ")")
+      
+      
       if(is.null(private$dRagonElement)) {
         element_name <- paste0("dt_", round(runif(1) * 10000000, 0))
         builder_class <- "DataTableElementBuilder"
         
-        code_preprocessing <- paste0("print(dat)\ndata_selected <- dat %>% select(", paste(input$dataTableElementBuilder_vars, collapse = ", "), ")")
-        
-        
-        code_element <- paste0('DT::datatable(data_selected, options = list(paging = FALSE, searching = FALSE))')
         
         
         uiOutput <- DT::dataTableOutput(outputId = element_name)
@@ -45,8 +45,10 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
                                           code_preprocessing, code_element,
                                           uiOutput, renderFunction)
       } else {
+        element_name <- private$dRagonElement$element_name
         dt_element <- private$dRagonElement
         dt_element$code_element <- code_element
+        dt_element$code_preprocessing <- code_preprocessing
       }
       
       dt_element$inner_state$vars <- input$dataTableElementBuilder_vars
