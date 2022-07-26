@@ -1,4 +1,4 @@
-dRagonElement <-  R6::R6Class("dRagonElement",
+dashboardBuilderElement <-  R6::R6Class("dashboardBuilderElement",
   private = list(
     # see documentation at corresponding active field
     .element_name = NULL,

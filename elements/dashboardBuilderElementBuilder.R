@@ -1,7 +1,7 @@
-dRagonElementBuilder <- R6::R6Class("dRagonElementBuilder",
+dashboardBuilderElementBuilder <- R6::R6Class("dashboardBuilderElementBuilder",
   private = list(
     .elementBuilder_name = NULL,
-    dRagonElement = NULL,
+    dashboardBuilderElement = NULL,
     dataset = NULL
   ),
   active = list(
@@ -18,7 +18,7 @@ dRagonElementBuilder <- R6::R6Class("dRagonElementBuilder",
       private$dataset <- dataset
     },
     
-    load_element = function(dRagonElement, session) {
+    load_element = function(dashboardBuilderElement, session) {
       stop("please overwrite 'load_element' in the elment-specific subclass", call. = FALSE)
     },
     

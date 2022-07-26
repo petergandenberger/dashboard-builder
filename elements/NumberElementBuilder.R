@@ -1,5 +1,5 @@
 NumberElementBuilder <- R6::R6Class("NumberElementBuilder",
-  inherit = dRagonElementBuilder,                               
+  inherit = dashboardBuilderElementBuilder,                               
   public = list(
     initialize = function(dataset) {
       private$.elementBuilder_name = "Number"
@@ -11,16 +11,16 @@ NumberElementBuilder <- R6::R6Class("NumberElementBuilder",
                   max = 100, value = 50)
     },
     
-    load_element = function(dRagonElement, session) {
+    load_element = function(dashboardBuilderElement, session) {
       # set slider to saved number 
-      private$dRagonElement <- dRagonElement
+      private$dashboardBuilderElement <- dashboardBuilderElement
       updateSliderInput(session, "numberElementBuilder_slider", label = "Slider", min = 0, 
-                        max = 100, value = dRagonElement$inner_state)
+                        max = 100, value = dashboardBuilderElement$inner_state)
     },
     
     build_element = function (input) {
       code_element <- paste0('"', input$numberElementBuilder_slider, '"')
-      if(is.null(private$dRagonElement)) {
+      if(is.null(private$dashboardBuilderElement)) {
         element_name <- paste0(round(runif(1) * 10000000, 0))
         builder_class <- "NumberElementBuilder"
         
@@ -29,11 +29,11 @@ NumberElementBuilder <- R6::R6Class("NumberElementBuilder",
         uiOutput <- textOutput(outputId = element_name)
         renderFunction <- renderText
         
-        number_element <- dRagonElement$new(element_name, builder_class, 
+        number_element <- dashboardBuilderElement$new(element_name, builder_class, 
                                             code_preprocessing, code_element,
                                             uiOutput, renderFunction)
       } else {
-        number_element <- private$dRagonElement
+        number_element <- private$dashboardBuilderElement
         number_element$code_element <- code_element
       }
       

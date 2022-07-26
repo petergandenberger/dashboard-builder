@@ -20,8 +20,8 @@ library(shinyalert)
 source("ui.R")
 source("server.R")
 
-source("elements/dRagonElement.R")
-source("elements/dRagonElementBuilder.R")
+source("elements/dashboardBuilderElement.R")
+source("elements/dashboardBuilderElementBuilder.R")
 
 
 source("elements/TextElementBuilder.R")

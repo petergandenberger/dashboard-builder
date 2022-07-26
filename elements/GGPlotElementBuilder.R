@@ -1,5 +1,5 @@
 GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
-  inherit = dRagonElementBuilder,
+  inherit = dashboardBuilderElementBuilder,
   private = list(
     ggplot_results = NULL
   ),
@@ -21,16 +21,16 @@ GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
       )
     },
     
-    load_element = function(dRagonElement, session) {
+    load_element = function(dashboardBuilderElement, session) {
       # set slider to saved number 
-      private$dRagonElement <- dRagonElement
+      private$dashboardBuilderElement <- dashboardBuilderElement
       #TODO
     },
     
     build_element = function (input) {
       code_element <- private$ggplot_results$code_plot
       
-      if(is.null(private$dRagonElement)) {
+      if(is.null(private$dashboardBuilderElement)) {
         element_name <- paste0("plot_", round(runif(1) * 10000000, 0))
         builder_class <- "GGPlotElementBuilder"
         
@@ -40,11 +40,11 @@ GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
         renderFunction <- renderPlot
         
         
-        ggplot_element <- dRagonElement$new(element_name, builder_class, 
+        ggplot_element <- dashboardBuilderElement$new(element_name, builder_class, 
                                           code_preprocessing, code_element,
                                           uiOutput, renderFunction)
       } else {
-        ggplot_element <- private$dRagonElement
+        ggplot_element <- private$dashboardBuilderElement
         ggplot_element$code_element <- code_element
       }
       

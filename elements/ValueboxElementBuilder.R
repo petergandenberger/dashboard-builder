@@ -1,5 +1,5 @@
 ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
-  inherit = dRagonElementBuilder,                               
+  inherit = dashboardBuilderElementBuilder,                               
   public = list(
     initialize = function(dataset) {
       private$.elementBuilder_name = "Valuebox"
@@ -14,13 +14,13 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
       )
     },
     
-    load_element = function(dRagonElement, session) {
+    load_element = function(dashboardBuilderElement, session) {
       # set slider to saved number 
-      private$dRagonElement <- dRagonElement
+      private$dashboardBuilderElement <- dashboardBuilderElement
       updateTextInput(session, "valueboxElementBuilder_title", "Title", 
-                      dRagonElement$inner_state$valueboxElementBuilder_title)
+                      dashboardBuilderElement$inner_state$valueboxElementBuilder_title)
       updateNumericInput(session, "valueboxElementBuilder_value", "Value", 
-                         dRagonElement$inner_state$valueboxElementBuilder_value)
+                         dashboardBuilderElement$inner_state$valueboxElementBuilder_value)
     },
     
     build_element = function (input) {
@@ -30,7 +30,7 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
       
       code_element <- paste0('bs4Dash::bs4ValueBox(
             "', title, '", ', value, ', icon = icon("', icon, '"), width = 12)')
-      if(is.null(private$dRagonElement)) {
+      if(is.null(private$dashboardBuilderElement)) {
         element_name <- paste0("vb_", round(runif(1) * 10000000, 0))
         builder_class <- "ValueboxElementBuilder"
         
@@ -39,11 +39,11 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
         uiOutput <- bs4Dash::bs4ValueBoxOutput(outputId = element_name, width = 12)
         renderFunction <-  bs4Dash::renderbs4ValueBox
         
-        infobox_element <- dRagonElement$new(element_name, builder_class, 
+        infobox_element <- dashboardBuilderElement$new(element_name, builder_class, 
                                           code_preprocessing, code_element,
                                           uiOutput, renderFunction)
       } else {
-        infobox_element <- private$dRagonElement
+        infobox_element <- private$dashboardBuilderElement
         infobox_element$code_element <- code_element
       }
       

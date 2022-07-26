@@ -1,5 +1,5 @@
 DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
-  inherit = dRagonElementBuilder,                               
+  inherit = dashboardBuilderElementBuilder,                               
   public = list(
     initialize = function(dataset) {
       private$.elementBuilder_name = "DataTable"
@@ -17,11 +17,11 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
       ui
     },
     
-    load_element = function(dRagonElement, session) {
+    load_element = function(dashboardBuilderElement, session) {
       # set slider to saved number 
-      private$dRagonElement <- dRagonElement
+      private$dashboardBuilderElement <- dashboardBuilderElement
       updateSelectInput(session, "dataTableElementBuilder_vars", "Select vars for the Columns", 
-                        names(private$dataset), selected = dRagonElement$inner_state$vars)
+                        names(private$dataset), selected = dashboardBuilderElement$inner_state$vars)
     },
     
     build_element = function (input) {
@@ -32,7 +32,7 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
       code_preprocessing <- paste0("print(dat)\ndata_selected <- dat %>% select(", paste(input$dataTableElementBuilder_vars, collapse = ", "), ")")
       
       
-      if(is.null(private$dRagonElement)) {
+      if(is.null(private$dashboardBuilderElement)) {
         element_name <- paste0("dt_", round(runif(1) * 10000000, 0))
         builder_class <- "DataTableElementBuilder"
         
@@ -41,12 +41,12 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
         uiOutput <- DT::dataTableOutput(outputId = element_name)
         renderFunction <- DT::renderDataTable
         
-        dt_element <- dRagonElement$new(element_name, builder_class, 
+        dt_element <- dashboardBuilderElement$new(element_name, builder_class, 
                                           code_preprocessing, code_element,
                                           uiOutput, renderFunction)
       } else {
-        element_name <- private$dRagonElement$element_name
-        dt_element <- private$dRagonElement
+        element_name <- private$dashboardBuilderElement$element_name
+        dt_element <- private$dashboardBuilderElement
         dt_element$code_element <- code_element
         dt_element$code_preprocessing <- code_preprocessing
       }

@@ -9,7 +9,6 @@ render_element <- function(input, output, element) {
 }
 
 add_element <- function(element) {
-  ##TODO check that the element of class 'dRagonElement'
   js$add_grid_stack_element(paste0('{"w": 3, "h": 3, "id": "c_', element$element_name,'", ', 
                                    '"content": "<button class = \\"settings\\" id = \\"btn_edit_', element$element_name, 
                                    '\\" data-target = \\"', element$element_name, '\\"',
