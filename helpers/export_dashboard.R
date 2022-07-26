@@ -1,15 +1,8 @@
 export_dashboard <- function(input, st, saved_layout, data) {
   dir.create("out")
-  csv_out <- FALSE
-  load_data <- tryCatch({
-      write.csv(data, "out/data.csv")
-      csv_out <- TRUE
-      'dat <- read.csv("data.csv")'
-    },
-    error=function(cond) {
-      saveRDS(data, "out/data.csv")
-      'dat <- readRDS("data.csv")'
-    })
+  
+  saveRDS(data, "out/data.RDS")
+  load_data <- 'dat <- readRDS("data.RDS")'
   
   grid_stack_items <- jsonify::from_json(saved_layout)
   elements <- st$list()
@@ -99,11 +92,7 @@ shinyApp(ui, server)
 write(file, file = "out/app.R")
 styler::style_file("out/app.R")
 files <- c("out/app.R", "out/dashboard.Rproj")
-if(csv_out) {
-  files <- c(files, 'out/data.csv')
-} else {
-  files <- c(files, 'out/data.RDS')
-}
+files <- c(files, 'out/data.RDS')
 zip(zipfile = 'out/dashboard', files)
 print("done")
 }
