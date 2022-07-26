@@ -49,7 +49,10 @@ export_dashboard <- function(input, st, saved_layout, data) {
   }
   
   
-  file <- paste0('library(gridstackeR)
+  file <- paste0('
+#devtools::install_github("https://github.com/petergandenberger/gridstackeR")
+
+library(gridstackeR)
 library(shiny)
 library(shinydashboard)
 library(shinyjs)
