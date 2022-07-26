@@ -54,7 +54,7 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
       infobox_element$inner_state$valueboxElementBuilder_icon <- icon
       
       infobox_element$renderFunction_name <- "bs4Dash::renderbs4ValueBox"
-      infobox_element$uiOutput_name <- paste0("bs4Dash::bs4ValueBoxOutput(outputId = '", element_name, "', width = 12)")
+      infobox_element$uiOutput_name <- paste0("bs4Dash::bs4ValueBoxOutput(outputId = '", infobox_element$element_name, "', width = 12)")
       
       infobox_element
     }

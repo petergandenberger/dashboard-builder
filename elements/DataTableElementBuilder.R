@@ -45,7 +45,6 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
                                           code_preprocessing, code_element,
                                           uiOutput, renderFunction)
       } else {
-        element_name <- private$dashboardBuilderElement$element_name
         dt_element <- private$dashboardBuilderElement
         dt_element$code_element <- code_element
         dt_element$code_preprocessing <- code_preprocessing
@@ -53,7 +52,7 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
       
       dt_element$inner_state$vars <- input$dataTableElementBuilder_vars
       dt_element$renderFunction_name <- "DT::renderDataTable"
-      dt_element$uiOutput_name <- paste0("DT::dataTableOutput(outputId = '", element_name, "')")
+      dt_element$uiOutput_name <- paste0("DT::dataTableOutput(outputId = '", dt_element$element_name, "')")
       dt_element
     }
   )

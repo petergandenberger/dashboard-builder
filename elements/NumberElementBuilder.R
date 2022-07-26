@@ -39,7 +39,7 @@ NumberElementBuilder <- R6::R6Class("NumberElementBuilder",
       
       number_element$inner_state <- input$numberElementBuilder_slider
       number_element$renderFunction_name <- "renderText"
-      number_element$uiOutput_name <- paste0('textOutput(outputId = "', element_name, '")')
+      number_element$uiOutput_name <- paste0('textOutput(outputId = "', number_element$element_name, '")')
       number_element
     }
   )

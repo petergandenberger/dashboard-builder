@@ -38,7 +38,7 @@ TextElementBuilder <- R6::R6Class("TextElementBuilder",
       text_element$inner_state <- input$textElementBuilder_textInput
       
       text_element$renderFunction_name <- "renderText"
-      text_element$uiOutput_name <- paste0('textOutput(outputId = "', element_name, '")')
+      text_element$uiOutput_name <- paste0('textOutput(outputId = "', text_element$element_name, '")')
       
       text_element
     }
