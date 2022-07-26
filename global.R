@@ -1,4 +1,4 @@
-#devtools::install_github("https://github.com/petergandenberger/gridstackeR/tree/experiments")
+#devtools::install_github("https://github.com/petergandenberger/gridstackeR")
 
 library(shiny)
 library(shinyjs)
