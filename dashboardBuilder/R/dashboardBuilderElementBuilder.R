@@ -17,16 +17,16 @@ dashboardBuilderElementBuilder <- R6::R6Class("dashboardBuilderElementBuilder",
     initialize = function(dataset) {
       private$dataset <- dataset
     },
-    
+
     load_element = function(dashboardBuilderElement, session) {
       stop("please overwrite 'load_element' in the elment-specific subclass", call. = FALSE)
     },
-    
-    get_builder_UI = function () {
+
+    get_builder_UI = function (ns) {
       stop("please overwrite 'get_builder_UI' in the elment-specific subclass", call. = FALSE)
     },
-    
-    build_element = function (input) {
+
+    build_element = function (input, ns) {
       stop("please overwrite 'build_element' in the elment-specific subclass", call. = FALSE)
     }
   )

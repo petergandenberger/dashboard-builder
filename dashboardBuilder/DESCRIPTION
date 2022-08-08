@@ -1,0 +1,19 @@
+Package: dashboardBuilder
+Title: DashboardBuilder
+Version: 0.0.0.9000
+Authors@R: 
+    person("Peter", "Gandenberger", , "peter.gandenberger@gmail.com", role = c("cre", "aut"))
+Description: Build shiny apps without writing code.
+License: MIT + file LICENSE
+Imports: 
+    config (>= 0.3.1),
+    golem (>= 0.3.3),
+    shiny (>= 1.7.1)
+Suggests: 
+    spelling,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+RoxygenNote: 7.2.1

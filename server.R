@@ -7,15 +7,7 @@ server <- function(input, output, session) {
     delete_element(input$deleteElement, st)
   })
   
-  observeEvent(input$import_data, {
-    import_modal(
-      id = "import_mod",
-      from = c("env", "file", "googlesheets"),
-      title = "Import data to be used in application"
-    )
-  })
   
-  data_imported <- import_server("import_mod", return_class = "tbl_df")
   
   observe({
     req(!is.null(data_imported$data()))
@@ -26,23 +18,7 @@ server <- function(input, output, session) {
          GGPlotElementBuilder$new(dat))
   })
   
-  observeEvent(input$export, {
-    js$save_grid_stack_layout()
-  })
-  
-  observeEvent(input$saved_layout, {
-    export_dashboard(input, st, input$saved_layout, dat)
-    shinyjs::click("downloadDashboard")
-  })
-  
-  output$downloadDashboard <- downloadHandler(
-    filename = function() {
-      "dashboard.zip"
-    },
-    content = function(file) {
-      file.copy("out/dashboard.zip", file)
-    }
-  )
+ 
   
   observeEvent(input$add_element, {
     if(is.null(elementBuilder_list)) {
