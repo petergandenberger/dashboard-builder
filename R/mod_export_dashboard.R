@@ -30,7 +30,7 @@ mod_export_dashboard_server <- function(id, st, trigger, data){
     observe({
       req(trigger())
       if(trigger() != "[]"){
-        export_dashboard(input, st, trigger(), data())
+        export_dashboard(input, st, trigger(), data$data())
       }
       shinyjs::click("downloadDashboard")
     })

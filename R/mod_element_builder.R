@@ -14,6 +14,8 @@ mod_element_builder_ui <- function(id){
 #' element_builder Server Functions
 #'
 #' @noRd
+#'
+#' @importFrom shinyalert shinyalert
 mod_element_builder_server <- function(id, elementBuilder_list, trigger, st){
   moduleServer( id, function(input, output, session){
     ns <- session$ns

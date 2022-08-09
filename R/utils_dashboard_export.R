@@ -21,7 +21,8 @@ export_dashboard <- function(input, st, saved_layout, data) {
 
 
     if(element$add_bounding_box) {
-      content <- paste0('box(
+      content <- paste0('
+      box(
           title = "', element$display_name, '", status = "primary", solidHeader = TRUE, width = 12,
           height = "100%", collapsible = F,
           ', element$uiOutput_name, ')')
@@ -75,16 +76,9 @@ ui <- dashboardPage(
   dashboardSidebar(disable = TRUE),
   dashboardBody(
     useShinyjs(),
-    # make sure the content fills the given height
-    tags$style(".grid-stack-item-content {height:100%;}"),
-    tags$style(".dataTables_scroll {height: calc(100% - 100px);}
-                .dataTables_wrapper {height: 100%;}
-                .datatables {height: 100%!important; overflow: scroll;}"),
-    tags$style(".grid-stack-item-content .col-sm-12 {height: 100%;}"),
-    tags$style(".bs4Dash.card {height: calc(100% - 10px);}"),
-    tags$style(".small-box {height: calc(100% - 10px);}"),
-    tags$style(".small-box .inner {height: calc(100% - 10px);}"),
-    tags$style(".grid-stack-item-content {height:100%; overflow:hidden!important;}"),
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
+    ),
     grid_stack(
       dynamic_full_window_height = TRUE,
       ', elements_ui, '
@@ -101,8 +95,7 @@ shinyApp(ui, server)
 ')
 write(file, file = "out/app.R")
 styler::style_file("out/app.R")
-files <- c("out/app.R", "out/dashboard.Rproj")
+files <- c("out/app.R", "out/dashboard.Rproj", "out/www/styles.css")
 files <- c(files, 'out/data.RDS')
-zip(zipfile = 'out/dashboard', files)
-print("done")
+utils::zip(zipfile = 'out/dashboard', files)
 }

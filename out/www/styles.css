@@ -1,0 +1,10 @@
+/* styles for the grid-stack_items */
+.grid-stack-item-content {height:100%;}
+.dataTables_scroll {height: calc(100% - 100px);}
+.dataTables_wrapper {height: 100%;}
+.datatables {height: 100%!important; overflow: scroll;}
+.grid-stack-item-content .col-sm-12 {height: 100%;}
+.bs4Dash.card {height: calc(100% - 10px);}
+.small-box {height: calc(100% - 10px);}
+.small-box .inner {height: calc(100% - 10px);}
+.grid-stack-item-content {height:100%; overflow:hidden!important;}

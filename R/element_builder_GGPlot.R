@@ -50,8 +50,8 @@ GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
 
       ggplot_element$inner_state <- input$textElementBuilder_textInput
 
-      ggplot_element$renderFunction_name <- "ggplot2::renderPlot"
-      ggplot_element$uiOutput_name <- paste0('ggplot2::plotOutput(outputId = "', ggplot_element$element_name, '", height = "100%")')
+      ggplot_element$renderFunction_name <- "renderPlot"
+      ggplot_element$uiOutput_name <- paste0('plotOutput(outputId = "', ggplot_element$element_name, '", height = "100%")')
 
       ggplot_element
     }
