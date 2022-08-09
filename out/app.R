@@ -6,7 +6,6 @@ library(shiny)
 library(shinydashboard)
 library(shinyjs)
 library(ggplot2)
-library(bs4Dash)
 library(tidyr)
 library(dplyr)
 
@@ -23,11 +22,19 @@ ui <- dashboardPage(
     grid_stack(
       dynamic_full_window_height = TRUE,
       grid_stack_item(
-        h = 3, w = 3, x = 0, y = 0, id = "c_plot_5727106", style = "overflow:hidden",
+        h = 10, w = 7, x = 0, y = 0, id = "c_dt_8401911", style = "overflow:hidden",
         box(
-          title = "Element3893429", status = "primary", solidHeader = TRUE, width = 12,
+          title = "Element7968057", status = "primary", solidHeader = TRUE, width = 12,
           height = "100%", collapsible = F,
-          plotOutput(outputId = "plot_5727106", height = "100%")
+          DT::dataTableOutput(outputId = "dt_8401911")
+        )
+      ),
+      grid_stack_item(
+        h = 3, w = 5, x = 7, y = 0, id = "c_plot_513183", style = "overflow:hidden",
+        box(
+          title = "Element3149868", status = "primary", solidHeader = TRUE, width = 12,
+          height = "100%", collapsible = F,
+          plotOutput(outputId = "plot_513183", height = "100%")
         )
       )
     )
@@ -37,7 +44,11 @@ ui <- dashboardPage(
 server <- function(input, output, session) {
   dat <- readRDS("data.RDS")
 
-  output$plot_5727106 <- renderPlot({
+  output$dt_8401911 <- DT::renderDataTable({
+    data_selected <- dplyr::select(dat, Ozone, Solar.R)
+    DT::datatable(data_selected, options = list(paging = FALSE, searching = FALSE))
+  })
+  output$plot_513183 <- renderPlot({
     ggplot(dat) +
       aes(x = Ozone) +
       geom_histogram(bins = 30L, fill = "#112446") +

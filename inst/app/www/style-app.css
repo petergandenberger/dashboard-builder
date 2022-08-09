@@ -28,15 +28,12 @@
 /*--------------------------------------------------------------
 	Gridstack stuff
 --------------------------------------------------------------*/
-.grid-stack {
-  width = 100vw;
-}
-
-.grid-stack-item-content .col-sm-12 {height: calc(100% - 20px);}
+.grid-stack {width = 100vw;}
 .box-body {height: calc(100% - 45px);}
 .small-box {height: calc(100% - 10px);}
 .small-box .inner {height: calc(100% - 10px);}
-.grid-stack-item-content {height:100%; overflow:hidden!important;}
+.grid-stack-item-content {height: calc(100% - 20px); overflow:hidden!important;}
+.grid-stack-item-content .col-sm-12 {height: 100%;}
 
 /* data tables */
 .dataTables_scroll {height: calc(100% - 100px);}

@@ -65,7 +65,6 @@ library(shiny)
 library(shinydashboard)
 library(shinyjs)
 library(ggplot2)
-library(bs4Dash)
 library(tidyr)
 library(dplyr)
 
