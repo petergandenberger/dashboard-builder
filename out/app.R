@@ -1,3 +1,6 @@
+
+# devtools::install_github("https://github.com/petergandenberger/gridstackeR")
+
 library(gridstackeR)
 library(shiny)
 library(shinydashboard)
@@ -27,10 +30,10 @@ ui <- dashboardPage(
     grid_stack(
       dynamic_full_window_height = TRUE,
       grid_stack_item(
-        h = 8, w = 2, x = 0, y = 0, id = "c_dt_2408198", style = "overflow:hidden", box(
-          title = "Element691179", status = "primary", solidHeader = TRUE, width = 12,
+        h = 3, w = 3, x = 0, y = 0, id = "c_dt_5055526", style = "overflow:hidden", box(
+          title = "Element3437655", status = "primary", solidHeader = TRUE, width = 12,
           height = "100%", collapsible = F,
-          DT::dataTableOutput(outputId = "dt_2408198")
+          DT::dataTableOutput(outputId = "dt_5055526")
         )
       )
     )
@@ -40,9 +43,8 @@ ui <- dashboardPage(
 server <- function(input, output, session) {
   dat <- readRDS("data.RDS")
 
-  output$dt_2408198 <- DT::renderDataTable({
-    print(dat)
-    data_selected <- dat %>% select(name, height)
+  output$dt_5055526 <- DT::renderDataTable({
+    data_selected <- dplyr::select(dat, Ozone, Solar.R)
     DT::datatable(data_selected, options = list(paging = FALSE, searching = FALSE))
   })
 }

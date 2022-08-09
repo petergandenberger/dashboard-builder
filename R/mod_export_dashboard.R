@@ -17,16 +17,21 @@ mod_export_dashboard_ui <- function(id){
 
 #' export_dashboard Server Functions
 #'
+#' @import shinyjs
+#'
 #' @noRd
-mod_export_dashboard_server <- function(id){
+mod_export_dashboard_server <- function(id, st, trigger, data){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
     observeEvent(input$export, {
       js$save_grid_stack_layout()
     })
 
-    observeEvent(input$saved_layout, {
-      export_dashboard(input, st, input$saved_layout, dat)
+    observe({
+      req(trigger())
+      if(trigger() != "[]"){
+        export_dashboard(input, st, trigger(), data())
+      }
       shinyjs::click("downloadDashboard")
     })
 

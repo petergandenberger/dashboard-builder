@@ -11,10 +11,10 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     dashboardPage(
-      shinydashboardPlus::dashboardHeader(title = "Dashboard-Builder",
+      header = shinydashboardPlus::dashboardHeader(title = "Dashboard-Builder",
                       leftUi = tagList(
                         mod_import_data_ui("import_data"),
-                        mod_add_element_ui("add_element"),
+                        actionButton("add_element", "Add Element"),
                         mod_export_dashboard_ui("export_dashboard")
                       )
       ),
@@ -62,8 +62,7 @@ golem_add_external_resources <- function() {
       path = app_sys("app/www"),
       app_title = "dashboardBuilder"
     ),
-    shinyjs::useShinyjs(),
-    shinyalert::useShinyalert()
+    shinyjs::useShinyjs()
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
   )

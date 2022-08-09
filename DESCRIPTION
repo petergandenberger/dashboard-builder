@@ -7,7 +7,9 @@ Description: Build shiny apps without writing code.
 License: MIT + file LICENSE
 Imports: 
     config (>= 0.3.1),
+    ggplot2,
     golem (>= 0.3.3),
+    gridstackeR (>= 0.1.0),
     shiny (>= 1.7.1)
 Suggests: 
     spelling,
@@ -17,3 +19,5 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 RoxygenNote: 7.2.1
+Remotes:  
+    https://github.com/petergandenberger/gridstackeR

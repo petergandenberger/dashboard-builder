@@ -16,7 +16,7 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
 
     load_element = function(dashboardBuilderElement, session) {
       # set slider to saved number
-      private$dashboardBuilderElement <- dashboardBuilderElement
+      private$.dashboardBuilderElement <- dashboardBuilderElement
       updateTextInput(session, "valueboxElementBuilder_title", "Title",
                       dashboardBuilderElement$inner_state$valueboxElementBuilder_title)
       updateNumericInput(session, "valueboxElementBuilder_value", "Value",
@@ -30,20 +30,20 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
 
       code_element <- paste0('bs4Dash::bs4ValueBox(
             "', title, '", ', value, ', icon = icon("', icon, '"), width = 12)')
-      if(is.null(private$dashboardBuilderElement)) {
+      if(is.null(private$.dashboardBuilderElement)) {
         element_name <- paste0("vb_", round(runif(1) * 10000000, 0))
         builder_class <- "ValueboxElementBuilder"
 
         code_preprocessing <- NULL
 
-        uiOutput <- bs4Dash::bs4ValueBoxOutput(outputId = ns(element_name), width = 12)
+        uiOutput <- bs4Dash::bs4ValueBoxOutput(outputId = element_name, width = 12)
         renderFunction <-  bs4Dash::renderbs4ValueBox
 
         infobox_element <- dashboardBuilderElement$new(element_name, builder_class,
                                           code_preprocessing, code_element,
                                           uiOutput, renderFunction)
       } else {
-        infobox_element <- private$dashboardBuilderElement
+        infobox_element <- private$.dashboardBuilderElement
         infobox_element$code_element <- code_element
       }
 

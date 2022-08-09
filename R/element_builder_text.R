@@ -12,14 +12,13 @@ TextElementBuilder <- R6::R6Class("TextElementBuilder",
 
     load_element = function(dashboardBuilderElement, session) {
       # set slider to saved number
-      private$dashboardBuilderElement <- dashboardBuilderElement
+      private$.dashboardBuilderElement <- dashboardBuilderElement
       updateTextInput(session, "textElementBuilder_textInput", "Caption", dashboardBuilderElement$inner_state)
     },
 
     build_element = function (input, ns) {
-      browser()
       code_element <- paste0('"', input$textElementBuilder_textInput, '"')
-      if(is.null(private$dashboardBuilderElement)) {
+      if(is.null(private$.dashboardBuilderElement)) {
         element_name <- paste0("txt_", round(runif(1) * 10000000, 0))
         builder_class <- "TextElementBuilder"
 
@@ -32,7 +31,7 @@ TextElementBuilder <- R6::R6Class("TextElementBuilder",
                                           code_preprocessing, code_element,
                                           uiOutput, renderFunction)
       } else {
-        text_element <- private$dashboardBuilderElement
+        text_element <- private$.dashboardBuilderElement
         text_element$code_element <- code_element
       }
 

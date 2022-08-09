@@ -4,16 +4,17 @@
 }
 
 .modal-footer .shiny-input-container{
-  position: absolute;
-  left: 0; 
+  float: left;
+  text-align: left;
 }
-
-#element_name {margin-bottom: 25px;}
+.modal-footer .btn{
+  margin-top: 40px;
+}
 
 /* settings */
 .settings {
-  position: absolute; 
-  right: 10px; 
+  position: absolute;
+  right: 20px;
   top: 10px;
   background: none;
   border: none;
@@ -31,8 +32,8 @@
   width = 100vw;
 }
 
-.grid-stack-item-content .col-sm-12 {height: 100%;}
-.bs4Dash.card {height: calc(100% - 10px);}
+.grid-stack-item-content .col-sm-12 {height: calc(100% - 20px);}
+.box-body {height: calc(100% - 45px);}
 .small-box {height: calc(100% - 10px);}
 .small-box .inner {height: calc(100% - 10px);}
 .grid-stack-item-content {height:100%; overflow:hidden!important;}

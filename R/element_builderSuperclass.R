@@ -1,13 +1,20 @@
 dashboardBuilderElementBuilder <- R6::R6Class("dashboardBuilderElementBuilder",
   private = list(
     .elementBuilder_name = NULL,
-    dashboardBuilderElement = NULL,
+    .dashboardBuilderElement = NULL,
     dataset = NULL
   ),
   active = list(
     elementBuilder_name = function(value) {
       if(missing(value)) {
         private$.elementBuilder_name
+      } else {
+        stop("elementBuilder_name is read only", call. = FALSE)
+      }
+    },
+    dashboardBuilderElement = function(value) {
+      if(missing(value)) {
+        private$.dashboardBuilderElement
       } else {
         stop("elementBuilder_name is read only", call. = FALSE)
       }
