@@ -36,7 +36,7 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
 
         code_preprocessing <- NULL
 
-        uiOutput <- bs4Dash::bs4ValueBoxOutput(outputId = element_name, width = 12)
+        uiOutput <- bs4Dash::bs4ValueBoxOutput(outputId = ns(element_name), width = 12)
         renderFunction <-  bs4Dash::renderbs4ValueBox
 
         infobox_element <- dashboardBuilderElement$new(element_name, builder_class,

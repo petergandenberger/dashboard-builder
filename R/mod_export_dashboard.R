@@ -9,7 +9,7 @@
 #' @importFrom shiny NS tagList
 mod_export_dashboard_ui <- function(id){
   ns <- NS(id)
-  div(
+  tagList(
     actionButton(ns("export"), "Export"),
     downloadButton(ns("downloadDashboard"), "Download", style = "visibility: hidden;")
   )
@@ -20,17 +20,16 @@ mod_export_dashboard_ui <- function(id){
 #' @import shinyjs
 #'
 #' @noRd
-mod_export_dashboard_server <- function(id, st, trigger, data){
+mod_export_dashboard_server <- function(id, st, data){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
     observeEvent(input$export, {
-      js$save_grid_stack_layout()
+      js$save_grid_stack_layout_ns(ns(""))
     })
 
-    observe({
-      req(trigger())
-      if(trigger() != "[]"){
-        export_dashboard(input, st, trigger(), data$data())
+    observeEvent(input$saved_layout, {
+      if(input$saved_layout != "[]"){
+        export_dashboard(input, st, input$saved_layout, data$data())
       }
       shinyjs::click("downloadDashboard")
     })

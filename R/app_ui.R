@@ -11,13 +11,7 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     dashboardPage(
-      header = shinydashboardPlus::dashboardHeader(title = "Dashboard-Builder",
-                      leftUi = tagList(
-                        mod_import_data_ui("import_data"),
-                        actionButton("add_element", "Add Element"),
-                        mod_export_dashboard_ui("export_dashboard")
-                      )
-      ),
+      header = shinydashboardPlus::dashboardHeader(title = "Dashboard-Builder"),
       dashboardSidebar(
         sidebarMenu(
           id = "tabs",

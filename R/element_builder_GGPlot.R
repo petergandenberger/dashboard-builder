@@ -36,7 +36,7 @@ GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
 
         code_preprocessing <- NULL
 
-        uiOutput <- plotOutput(outputId = element_name, height = "100%")
+        uiOutput <- plotOutput(outputId = ns(element_name), height = "100%")
         renderFunction <- renderPlot
 
 

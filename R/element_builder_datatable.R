@@ -38,7 +38,7 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
 
 
 
-        uiOutput <- DT::dataTableOutput(outputId = element_name)
+        uiOutput <- DT::dataTableOutput(outputId = ns(element_name))
         renderFunction <- DT::renderDataTable
 
         dt_element <- dashboardBuilderElement$new(element_name, builder_class,

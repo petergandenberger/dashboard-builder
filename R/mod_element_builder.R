@@ -16,7 +16,7 @@ mod_element_builder_ui <- function(id){
 #' @noRd
 #'
 #' @importFrom shinyalert shinyalert
-mod_element_builder_server <- function(id, elementBuilder_list, trigger, st){
+mod_element_builder_server <- function(id, elementBuilder_list, trigger, st, ns_dashboard_page){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
@@ -57,7 +57,7 @@ mod_element_builder_server <- function(id, elementBuilder_list, trigger, st){
       element <- NULL
       for(elementBuilder in elementBuilder_list()) {
         if(elementBuilder$elementBuilder_name == input$tabset1) {
-          element <- elementBuilder$build_element(input, ns)
+          element <- elementBuilder$build_element(input, ns_dashboard_page)
           element$display_name <- input$element_name
           break
         }
