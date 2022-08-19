@@ -11,7 +11,11 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     dashboardPage(
-      header = shinydashboardPlus::dashboardHeader(title = "Dashboard-Builder"),
+      header = shinydashboardPlus::dashboardHeader(
+        title = "Dashboard-Builder",
+        tags$li(actionLink("guide", label = "", icon = icon("question")),
+                class = "dropdown")
+      ),
       dashboardSidebar(
         sidebarMenu(
           id = "tabs",
@@ -43,6 +47,7 @@ app_ui <- function(request) {
 #'
 #' @import shiny
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
+#' @importFrom cicerone use_cicerone
 #' @noRd
 golem_add_external_resources <- function() {
   add_resource_path(
@@ -56,7 +61,8 @@ golem_add_external_resources <- function() {
       path = app_sys("app/www"),
       app_title = "dashboardBuilder"
     ),
-    shinyjs::useShinyjs()
+    shinyjs::useShinyjs(),
+    use_cicerone()
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
   )
