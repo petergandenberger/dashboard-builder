@@ -1,0 +1,63 @@
+/*--------------------------------------------------------------
+	sidebar buttons
+--------------------------------------------------------------*/
+.control-sidebar .action-button {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: white;
+  margin: 5px 0;
+}
+
+.control-sidebar .action-button i{
+  margin-right: 5px;
+}
+
+/*--------------------------------------------------------------
+	Element Builder Modal
+--------------------------------------------------------------*/
+/* modal */
+.modal-footer {
+  border-top: 0;
+}
+
+.modal-footer .shiny-input-container{
+  float: left;
+  text-align: left;
+}
+.modal-footer .btn{
+  margin-top: 40px;
+}
+
+/*--------------------------------------------------------------
+	dashboard elements
+--------------------------------------------------------------*/
+
+/* settings */
+.settings {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  background: none;
+  border: none;
+}
+
+.settings i {
+  font-size: 20px;
+  color: darkslategray;
+}
+
+/*--------------------------------------------------------------
+	Gridstack stuff
+--------------------------------------------------------------*/
+.grid-stack {width = 100vw; min-height: 100px}
+.box-body {height: calc(100% - 45px);}
+.small-box {height: calc(100% - 10px);}
+.small-box .inner {height: calc(100% - 10px);}
+.grid-stack-item-content {height: calc(100% - 20px); overflow:hidden!important;}
+.grid-stack-item-content .col-sm-12 {height: 100%;}
+
+/* data tables */
+.dataTables_scroll {height: calc(100% - 100px);}
+.dataTables_wrapper {height: 100%;}
+.datatables {height: 100%!important; overflow: scroll;}
