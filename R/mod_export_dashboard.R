@@ -30,8 +30,10 @@ mod_export_dashboard_server <- function(id, st, data){
     observeEvent(input$saved_layout, {
       if(input$saved_layout != "[]"){
         export_dashboard(input, st, input$saved_layout, data$data())
+        shinyjs::click("downloadDashboard")
+      } else {
+        shinyalert("No Dashboard found", "Please create a Dashboard before exporting!", type = "error")
       }
-      shinyjs::click("downloadDashboard")
     })
 
     output$downloadDashboard <- downloadHandler(
