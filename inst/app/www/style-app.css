@@ -1,3 +1,21 @@
+/*--------------------------------------------------------------
+	sidebar buttons
+--------------------------------------------------------------*/
+.control-sidebar .action-button {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: white;
+  margin: 5px 0;
+}
+
+.control-sidebar .action-button i{
+  margin-right: 5px;
+}
+
+/*--------------------------------------------------------------
+	Element Builder Modal
+--------------------------------------------------------------*/
 /* modal */
 .modal-footer {
   border-top: 0;
@@ -10,6 +28,10 @@
 .modal-footer .btn{
   margin-top: 40px;
 }
+
+/*--------------------------------------------------------------
+	dashboard elements
+--------------------------------------------------------------*/
 
 /* settings */
 .settings {
@@ -28,7 +50,7 @@
 /*--------------------------------------------------------------
 	Gridstack stuff
 --------------------------------------------------------------*/
-.grid-stack {width = 100vw;}
+.grid-stack {width = 100vw; min-height: 100px}
 .box-body {height: calc(100% - 45px);}
 .small-box {height: calc(100% - 10px);}
 .small-box .inner {height: calc(100% - 10px);}

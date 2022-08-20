@@ -3,7 +3,7 @@
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
 #' @import shiny
-#' @import shinydashboard
+#' @import shinydashboardPlus
 #' @noRd
 app_ui <- function(request) {
   tagList(
@@ -11,19 +11,26 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     dashboardPage(
-      header = shinydashboardPlus::dashboardHeader(
+      header = dashboardHeader(
         title = "Dashboard-Builder",
-        tags$li(actionLink("guide", label = "", icon = icon("question")),
-                class = "dropdown")
-      ),
-      dashboardSidebar(
-        sidebarMenu(
-          id = "tabs",
-          menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-          menuItem("About", tabName = "about", icon = icon("info"))
+        tags$li(class = "dropdown",
+                actionLink("github_header", label = "", icon = icon("github"), style = "float:right;",
+                           onclick ="window.open('https://github.com/petergandenberger/dashboard-builder', '_blank')"),
+                actionLink("documentation_header", label = "", icon = icon("book"), style = "float:right;",
+                           onclick ="window.open('https://github.com/petergandenberger/dashboard-builder', '_blank')"),
+                actionLink("guide_header", label = "", icon = icon("question"), style = "float:right;")
         )
       ),
-      dashboardBody(
+      sidebar = dashboardSidebar(
+        minified = TRUE,
+        collapsed = TRUE,
+        shinydashboard::sidebarMenu(
+          id = "tabs",
+          shinydashboard::menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+          shinydashboard::menuItem("About", tabName = "about", icon = icon("info"))
+        )
+      ),
+      body = dashboardBody(
         tabItems(
           # First tab content
           tabItem(tabName = "dashboard",
@@ -34,7 +41,15 @@ app_ui <- function(request) {
           tabItem(tabName = "about",
                   mod_about_ui("about")
           )
-        )
+        ),
+        help_overlay()
+      ),
+      controlbar = dashboardControlbar(
+        skin = "dark",
+        collapsed = FALSE,
+        mod_import_data_ui("import_data"),
+        actionButton("element_add", "Add Element", icon = icon("square-plus"), class = "sidebar-button"),
+        mod_export_dashboard_ui("export_dashboard")
       )
     )
   )

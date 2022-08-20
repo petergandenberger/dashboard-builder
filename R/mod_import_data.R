@@ -9,7 +9,7 @@
 #' @importFrom shiny NS tagList
 mod_import_data_ui <- function(id){
   ns <- NS(id)
-  actionButton(ns("import_data"), "Import Data")
+  actionButton(ns("import_data"), "Import Data", icon = icon("upload"))
 }
 
 #' import_data Server Functions

@@ -38,7 +38,7 @@ element_render_ui <- function(element, ns) {
                                    ' onclick = \\"deleteElement(this.dataset.target, `', ns(""), '`)\\"><i class=\\"fa fa-times\\"></i></button>"}'))
 
   if(element$add_bounding_box) {
-    content <- box(
+    content <- shinydashboard::box(
       title = element$display_name, status = "success", solidHeader = TRUE,
       width = 12, height = "100%", collapsible = F,
       element$uiOutput

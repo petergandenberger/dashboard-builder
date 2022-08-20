@@ -10,7 +10,7 @@
 mod_export_dashboard_ui <- function(id){
   ns <- NS(id)
   tagList(
-    actionButton(ns("export"), "Export"),
+    actionButton(ns("export"), "Export", icon = icon("download")),
     downloadButton(ns("downloadDashboard"), "Download", style = "visibility: hidden;")
   )
 }

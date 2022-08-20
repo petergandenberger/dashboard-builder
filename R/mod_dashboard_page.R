@@ -11,11 +11,6 @@
 mod_dashboard_page_ui <- function(id){
   ns <- NS(id)
   tagList(
-    tagList(
-      mod_import_data_ui(ns("import_data")),
-      actionButton(ns("element_add"), "Add Element"),
-      mod_export_dashboard_ui(ns("export_dashboard"))
-    ),
     grid_stack(id = ns("grid-dashboard"),
                dynamic_full_window_height = TRUE, height_offset = 50)
   )
@@ -24,7 +19,7 @@ mod_dashboard_page_ui <- function(id){
 #' dashboard_page Server Functions
 #'
 #' @noRd
-mod_dashboard_page_server <- function(id){
+mod_dashboard_page_server <- function(id, data, trigger_add_element){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
     st <- storr::storr_rds(tempfile("storr_"))
@@ -32,7 +27,6 @@ mod_dashboard_page_server <- function(id){
     ##############################################################################
     # LOAD DATA ##################################################################
     ##############################################################################
-    data <- mod_import_data_server("import_data")
     elementBuilder_list <- reactive({
       if(is.null(data$data())) {
         return(NULL)
@@ -47,12 +41,15 @@ mod_dashboard_page_server <- function(id){
       }
     })
 
-
     ##############################################################################
     # CREATE and EDIT elements ###################################################
     ##############################################################################
     trigger_element <- reactiveVal()
-    observeEvent(input$element_add, {trigger_element(-1)})
+    observe({
+      req(trigger_add_element())
+      trigger_add_element(NULL)
+      trigger_element(-1)
+    })
     observeEvent(input$element_edit, {trigger_element(input$element_edit)})
 
     element_new <- mod_element_builder_server("element_builder", elementBuilder_list,
@@ -68,19 +65,14 @@ mod_dashboard_page_server <- function(id){
       st$set(element_new()$element_name, element_new())
     })
 
-
-    ##############################################################################
-    # EXPORT elements ############################################################
-    ##############################################################################
-    mod_export_dashboard_server("export_dashboard", st, data)
-
-
     ##############################################################################
     # DELETE elements ############################################################
     ##############################################################################
     observeEvent(input$element_delete, {
       element_delete(input$element_delete, st)
     })
+
+    st
   })
 }
 
