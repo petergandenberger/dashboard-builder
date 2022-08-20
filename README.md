@@ -1,7 +1,3 @@
----
-output: github_document
----
-
 # dashboardBuilder
 
 <!-- badges: start -->
