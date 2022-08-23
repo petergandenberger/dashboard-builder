@@ -29,13 +29,15 @@ element_render_server <- function(input, output, element, dat, ns) {
 #'
 #' @noRd
 element_render_ui <- function(element, ns) {
-  js$add_grid_stack_element(paste0('{"w": 3, "h": 3, "id": "c_', element$element_name,'", ',
-                                   '"content": "<button class = \\"settings\\" id = \\"btn_edit_', element$element_name,
-                                   '\\" data-target = \\"', element$element_name, '\\"',
-                                   ' onclick = \\"openModal(this.dataset.target, `', ns(""), '`)\\" style = \\"right: 50px\\"><i class=\\"fa fa-cog\\"></i></button>',
-                                   '<button class = \\"settings\\" id = \\"btn_delete_', element$element_name,
-                                   '\\" data-target = \\"', element$element_name, '\\"',
-                                   ' onclick = \\"deleteElement(this.dataset.target, `', ns(""), '`)\\"><i class=\\"fa fa-times\\"></i></button>"}'))
+  element_container <- paste0('{"w": 3, "h": 3, "id": "c_', element$element_name,'", ',
+    '"content": "<button class = \\"settings\\" id = \\"btn_edit_', element$element_name,
+    '\\" data-target = \\"', element$element_name, '\\"',
+    ' onclick = \\"openModal(this.dataset.target, `', ns(""), '`)\\" style = \\"right: 50px\\"><i class=\\"fa fa-cog\\"></i></button>',
+    '<button class = \\"settings\\" id = \\"btn_delete_', element$element_name,
+    '\\" data-target = \\"', element$element_name, '\\"',
+    ' onclick = \\"deleteElement(this.dataset.target, `', ns(""), '`)\\"><i class=\\"fa fa-times\\"></i></button>"}')
+
+  js$add_grid_element(grid_id = ns("grid-dashboard"), element = element_container)
 
   if(element$add_bounding_box) {
     content <- shinydashboard::box(

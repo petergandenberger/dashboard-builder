@@ -12,11 +12,12 @@ app_server <- function(input, output, session) {
   trigger_add_element <- reactiveVal()
   observeEvent(input$element_add, {trigger_add_element(-1)})
 
-  st <- mod_dashboard_page_server("dashboard_page", data, trigger_add_element)
+  dashboard_page_id = "dashboard_page"
+  st <- mod_dashboard_page_server(dashboard_page_id, data, trigger_add_element)
 
 
   # EXPORT elements ############################################################
-  mod_export_dashboard_server("export_dashboard", st, data)
+  mod_export_dashboard_server("export_dashboard", st, data, ns_dashboard_page = dashboard_page_id)
 
   # Guide ######################################################################
   guide <- create_guide()$init()
