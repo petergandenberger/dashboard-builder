@@ -28,7 +28,7 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
       col1 <- input$dataTableElementBuilder_col1
       col2 <- input$dataTableElementBuilder_col2
 
-      code_element <- paste0('DT::datatable(data_selected, options = list(paging = FALSE, searching = FALSE))')
+      code_element <- paste0('DT::datatable(data_selected, rownames = FALSE, options = list(paging = FALSE, searching = FALSE))')
       code_preprocessing <- paste0("data_selected <- dplyr::select(dat, ", paste(input$dataTableElementBuilder_vars, collapse = ", "), ")")
 
 
