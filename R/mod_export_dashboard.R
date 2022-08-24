@@ -27,6 +27,7 @@ mod_export_dashboard_server <- function(id, st, data, ns_dashboard_page){
 
     observeEvent(input$export, {
       shinyjs::js$save_grid_layout(grid_id = grid_id, ns = ns(""))
+
     })
 
 

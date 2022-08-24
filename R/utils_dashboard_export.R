@@ -6,11 +6,19 @@
 #'
 #' @noRd
 export_dashboard <- function(input, st, saved_layout, data) {
-  dir.create("out")
-
   saveRDS(data, "out/data.RDS")
-  load_data <- 'dat <- readRDS("data.RDS")'
 
+  file <- create_appR_file(st, saved_layout)
+
+  write(file, file = "out/app.R")
+  styler::style_file("out/app.R")
+  files <- c("out/app.R", "out/dashboard.Rproj", "out/www/styles.css")
+  files <- c(files, 'out/data.RDS')
+  utils::zip(zipfile = 'out/dashboard', files)
+}
+
+
+create_appR_file <- function(st, saved_layout) {
   grid_stack_items <- jsonify::from_json(saved_layout)
   elements <- st$list()
 
@@ -50,51 +58,15 @@ export_dashboard <- function(input, st, saved_layout, data) {
     }
 
     elements_server <- paste0(elements_server, '
-    output$', element$element_name, ' <- ', element$renderFunction_name, '({',
-                              code, '
+    output$', element$element_name, ' <- ', element$renderFunction_name, '({
+          ',code, '
     })'
     )
   }
 
-
-  file <- paste0('
-#devtools::install_github("https://github.com/petergandenberger/gridstackeR")
-
-library(gridstackeR)
-library(shiny)
-library(shinydashboard)
-library(shinyjs)
-library(ggplot2)
-library(tidyr)
-library(dplyr)
-
-
-ui <- dashboardPage(
-  title = "Dashboard-Builder Demo",
-  dashboardHeader(),
-  dashboardSidebar(disable = TRUE),
-  dashboardBody(
-    useShinyjs(),
-    tags$head(
-      tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
-    ),
-    grid_stack(
-      dynamic_full_window_height = TRUE,
-      ', elements_ui, '
-    )
-  )
-)
-
-server <- function(input, output, session) {
-  ', load_data, '
-  ', elements_server, '
-}
-
-shinyApp(ui, server)
-')
-write(file, file = "out/app.R")
-styler::style_file("out/app.R")
-files <- c("out/app.R", "out/dashboard.Rproj", "out/www/styles.css")
-files <- c(files, 'out/data.RDS')
-utils::zip(zipfile = 'out/dashboard', files)
+  text <- readtext::readtext('out/app_template.R')$text
+  code <- styler::style_text(code)
+  code <- paste0(code, collapse = "\n")
+  file <- sprintf(text, elements_ui, elements_server)
+  return(file)
 }
