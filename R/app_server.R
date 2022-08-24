@@ -7,6 +7,13 @@
 app_server <- function(input, output, session) {
   # Import Data ############################################################
   data <- mod_import_data_server("import_data")
+  output$txt_current_dataset <- renderText({
+    if(is.null(data$name())) {
+      return("No dataset loaded...")
+    } else {
+      data$name()
+    }
+  })
 
   # Dashboard page ############################################################
   trigger_add_element <- reactiveVal()

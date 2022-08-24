@@ -44,13 +44,7 @@ app_ui <- function(request) {
         ),
         help_overlay()
       ),
-      controlbar = dashboardControlbar(
-        skin = "dark",
-        collapsed = FALSE,
-        mod_import_data_ui("import_data"),
-        actionButton("element_add", "Add Element", icon = icon("square-plus"), class = "sidebar-button"),
-        mod_export_dashboard_ui("export_dashboard")
-      )
+      controlbar = right_sidebar()
     )
   )
 }

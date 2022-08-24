@@ -1,16 +1,52 @@
 /*--------------------------------------------------------------
-	sidebar buttons
+	right sidebar
 --------------------------------------------------------------*/
-.control-sidebar .action-button {
-  width: 100%;
+#right_sidebar {
+  background-color: #1E2B32;
+  color: white;
+}
+
+#right_sidebar .header{
+  padding: 5px;
+  background-color: #2A3942;
+}
+
+#right_sidebar h3{
+  margin: 10px;
+  font-size: 20px;
+}
+
+#right_sidebar i{
+  margin-right: 8px;
+}
+
+#right_sidebar li{
+  padding: 5px 10px;
+  margin-left: -40px;
+  margin-top: 0px;
+  list-style: none;
+  display: block;
+  color: white;
+}
+
+#right_sidebar li:hover{
+  transition: 0.5s all;
+  color: #2f89fc;
+  background-color: rgba(42, 56, 65, 0.82);
+  cursor: pointer;
+}
+
+
+#right_sidebar .action-button {
   background: transparent;
   border: none;
   color: white;
-  margin: 5px 0;
+  padding-left: 0px;
 }
 
-.control-sidebar .action-button i{
-  margin-right: 5px;
+#right_sidebar li:hover .action-button {
+  transition: 0.5s all;
+  color: #2f89fc;
 }
 
 /*--------------------------------------------------------------
