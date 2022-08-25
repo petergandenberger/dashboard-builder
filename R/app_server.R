@@ -16,11 +16,11 @@ app_server <- function(input, output, session) {
   })
 
   # Dashboard page ############################################################
-  trigger_add_element <- reactiveVal()
-  observeEvent(input$element_add, {trigger_add_element(-1)})
+  triggers_dashboard_page <- reactiveValues(add_element = NULL)
+  observeEvent(input$element_add, {triggers_dashboard_page$add_element <- -1})
 
   dashboard_page_id = "dashboard_page"
-  st <- mod_dashboard_page_server(dashboard_page_id, data, trigger_add_element)
+  st <- mod_dashboard_page_server(dashboard_page_id, data, triggers_dashboard_page)
 
   # Code page ##################################################################
   trigger_code_page <- reactiveVal()

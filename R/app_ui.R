@@ -27,8 +27,8 @@ app_ui <- function(request) {
         shinydashboard::sidebarMenu(
           id = "tabs",
           shinydashboard::menuItem("App", icon = icon("table-columns"),
-                                   shinydashboard::menuSubItem("Dashboard", tabName = "tab_dashboard", icon = icon("palette")),
-                                   shinydashboard::menuSubItem("Code", tabName = "tab_code", icon = icon("laptop-code"), selected = T)
+                                   shinydashboard::menuSubItem("Dashboard", tabName = "tab_dashboard", icon = icon("palette"), selected = T),
+                                   shinydashboard::menuSubItem("Code", tabName = "tab_code", icon = icon("laptop-code"))
           ),
           shinydashboard::menuItem("About", tabName = "about", icon = icon("info"))
         )

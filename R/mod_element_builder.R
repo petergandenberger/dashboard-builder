@@ -21,15 +21,15 @@ mod_element_builder_server <- function(id, elementBuilder_list, trigger, st, ns_
     ns <- session$ns
 
     observe({
-      req(trigger())
+      req(trigger$add_element)
 
       if(is.null(elementBuilder_list())) {
         shinyalert("No Dataset available", "Please add some data first!", type = "error")
       } else {
-        if(trigger() == -1) {
+        if(trigger$add_element == -1) {
           elementBuilder_list_new <- elementBuilder_list
         } else {
-          current_element <- st$get(trigger())
+          current_element <- st$get(trigger$add_element)
             elementBuilder_list_edited <- function(){NULL}
             for(elementBuilder in elementBuilder_list()) {
              if(class(elementBuilder)[1] == current_element$builder_class) {
@@ -48,7 +48,7 @@ mod_element_builder_server <- function(id, elementBuilder_list, trigger, st, ns_
           updateTextInput(session, "element_name", "Element Name", current_element$display_name)
         }
       }
-      trigger(NULL)
+      trigger$add_element <- NULL
     })
 
 

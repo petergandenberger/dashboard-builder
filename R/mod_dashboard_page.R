@@ -19,7 +19,7 @@ mod_dashboard_page_ui <- function(id){
 #' dashboard_page Server Functions
 #'
 #' @noRd
-mod_dashboard_page_server <- function(id, data, trigger_add_element){
+mod_dashboard_page_server <- function(id, data, triggers_dashboard_page){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
     st <- storr::storr_rds(tempfile("storr_"))
@@ -44,16 +44,10 @@ mod_dashboard_page_server <- function(id, data, trigger_add_element){
     ##############################################################################
     # CREATE and EDIT elements ###################################################
     ##############################################################################
-    trigger_element <- reactiveVal()
-    observe({
-      req(trigger_add_element())
-      trigger_add_element(NULL)
-      trigger_element(-1)
-    })
-    observeEvent(input$element_edit, {trigger_element(input$element_edit)})
+    observeEvent(input$element_edit, {triggers_dashboard_page$add_element <- input$element_edit})
 
     element_new <- mod_element_builder_server("element_builder", elementBuilder_list,
-                                              trigger_element, st, ns)
+                                              triggers_dashboard_page, st, ns)
 
     observe({
       req(element_new())
