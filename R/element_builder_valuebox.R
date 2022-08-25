@@ -28,8 +28,9 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
       value <- input$valueboxElementBuilder_value
       icon <- input$valueboxElementBuilder_icon
 
-      code_element <- paste0('bs4Dash::bs4ValueBox(
-            "', title, '", ', value, ', icon = icon("', icon, '"), width = 12)')
+      code_element <- paste0('shinydashboard::valueBox(
+            value = "', value, '", subtitle = "', title, '", icon = icon("', icon, '"),',
+            ' width = 12, color = "light-blue")')
       if(is.null(private$.dashboardBuilderElement)) {
         element_name <- paste0("vb_", round(runif(1) * 10000000, 0))
         builder_class <- "ValueboxElementBuilder"
@@ -39,24 +40,25 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
         uiOutput <- bs4Dash::bs4ValueBoxOutput(outputId = ns(element_name), width = 12)
         renderFunction <-  bs4Dash::renderbs4ValueBox
 
-        infobox_element <- dashboardBuilderElement$new(element_name, builder_class,
+        valuebox_element <- dashboardBuilderElement$new(element_name, builder_class,
                                           code_preprocessing, code_element,
                                           uiOutput, renderFunction)
       } else {
-        infobox_element <- private$.dashboardBuilderElement
-        infobox_element$code_element <- code_element
+        valuebox_element <- private$.dashboardBuilderElement
+        valuebox_element$code_element <- code_element
       }
 
-      infobox_element$add_bounding_box <- FALSE
+      valuebox_element$add_bounding_box <- FALSE
 
-      infobox_element$inner_state$valueboxElementBuilder_title <- title
-      infobox_element$inner_state$valueboxElementBuilder_value <- value
-      infobox_element$inner_state$valueboxElementBuilder_icon <- icon
+      valuebox_element$inner_state$valueboxElementBuilder_title <- title
+      valuebox_element$inner_state$valueboxElementBuilder_value <- value
+      valuebox_element$inner_state$valueboxElementBuilder_icon <- icon
 
-      infobox_element$renderFunction_name <- "bs4Dash::renderbs4ValueBox"
-      infobox_element$uiOutput_name <- paste0("bs4Dash::bs4ValueBoxOutput(outputId = '", infobox_element$element_name, "', width = 12)")
+      valuebox_element$renderFunction_name <- "shinydashboard::renderValueBox"
+      valuebox_element$uiOutput_name <- paste0("shinydashboard::valueBoxOutput(outputId = '",
+                                              valuebox_element$element_name, "', width = 12)")
 
-      infobox_element
+      valuebox_element
     }
   )
 )

@@ -54,6 +54,15 @@ mod_dashboard_page_server <- function(id, data, triggers_dashboard_page){
       # check if element already exists
       if(!st$exists(element_new()$element_name)) {
         element_render_ui(element_new(), ns)
+      } else {
+        # change the box title if available
+        shinydashboardPlus::updateBox(
+          id = paste0("boxa_", element_new()$element_name),
+          action = "update",
+          options = list(
+            title = element_new()$display_name
+          )
+        )
       }
       element_render_server(input, output, element_new(), data$data(), ns)
       st$set(element_new()$element_name, element_new())

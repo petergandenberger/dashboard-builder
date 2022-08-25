@@ -40,9 +40,9 @@ element_render_ui <- function(element, ns) {
   js$add_grid_element(grid_id = ns("grid-dashboard"), element = element_container)
 
   if(element$add_bounding_box) {
-    content <- shinydashboard::box(
-      title = element$display_name, status = "success", solidHeader = TRUE,
-      width = 12, height = "100%", collapsible = F,
+    content <- shinydashboardPlus::box(
+      title = element$display_name, id = ns(paste0("boxa_", element$element_name)),
+      width = 12, height = "100%",
       element$uiOutput
     )
   } else {
