@@ -26,11 +26,9 @@ app_ui <- function(request) {
         collapsed = TRUE,
         shinydashboard::sidebarMenu(
           id = "tabs",
-          shinydashboard::menuItem("App", icon = icon("table-columns"),
-                                   shinydashboard::menuSubItem("Dashboard", tabName = "tab_dashboard", icon = icon("palette"), selected = T),
-                                   shinydashboard::menuSubItem("Code", tabName = "tab_code", icon = icon("laptop-code"))
-          ),
-          shinydashboard::menuItem("About", tabName = "about", icon = icon("info"))
+          shinydashboard::menuItem("Dashboard", tabName = "tab_dashboard", icon = icon("palette"), selected = T),
+          shinydashboard::menuItem("Code", tabName = "tab_code", icon = icon("laptop-code"))
+          #,shinydashboard::menuItem("About", tabName = "about", icon = icon("info"))
         )
       ),
       body = dashboardBody(

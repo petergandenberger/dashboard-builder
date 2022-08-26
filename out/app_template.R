@@ -1,5 +1,3 @@
-#devtools::install_github("https://github.com/petergandenberger/gridstackeR")
-
 library(gridstackeR)
 library(shiny)
 library(shinydashboard)

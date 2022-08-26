@@ -22,11 +22,9 @@ mod_code_page_ui <- function(id){
 #' code_page Server Functions
 #'
 #' @noRd
-mod_code_page_server <- function(id, st, ns_dashboard_page, trigger_code_page){
+mod_code_page_server <- function(id, st, grid_id, trigger_code_page){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
-
-    grid_id <- paste0(ns_dashboard_page, "-grid-dashboard")
 
     observeEvent(trigger_code_page(), {
       trigger_code_page(NULL)

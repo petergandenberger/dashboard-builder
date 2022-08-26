@@ -20,21 +20,19 @@ mod_export_dashboard_ui <- function(id){
 #' @import shinyjs
 #'
 #' @noRd
-mod_export_dashboard_server <- function(id, st, data, ns_dashboard_page){
+mod_export_dashboard_server <- function(id, st, data, grid_id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
-    grid_id <- paste0(ns_dashboard_page, "-grid-dashboard")
 
     observeEvent(input$export, {
       shinyjs::js$save_grid_layout(grid_id = grid_id, ns = ns(""))
-
     })
 
 
     observeEvent(input[[paste0(grid_id, "_saved_layout")]], {
       saved_layout <- input[[paste0(grid_id, "_saved_layout")]]
-      if(saved_layout != "[]"){
-        export_dashboard(input, st, saved_layout, data$data())
+      if(saved_layout != "[]" & length(st$list()) > 0){
+        export_dashboard(st, saved_layout, data$data())
         shinyjs::click("downloadDashboard")
       } else {
         shinyalert("No Dashboard found", "Please create a Dashboard before exporting!", type = "error")

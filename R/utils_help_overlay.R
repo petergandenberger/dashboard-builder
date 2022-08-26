@@ -19,6 +19,15 @@ help_overlay <- function() {
           actionButton("guide_dashboard", "Take a Tour",
                        icon = icon("circle-question"), style = "width: 100%; margin-top: 10px;")
        ),
+      shinydashboardPlus::box(
+        title = "Example Dashboard",
+        width = 4,
+        status = "warning",
+        "Load an example dashboard to see what you can do with the Dashboard-Builder.",
+        br(),
+        actionButton("help_load_example", "Load Example", icon = icon("table-columns"),
+                     style = "width: 100%; margin-top: 10px;")
+      ),
        shinydashboardPlus::box(
          title = "Github Project",
          width = 4,
@@ -28,16 +37,6 @@ help_overlay <- function() {
          actionButton("gitHub", "GitHub", icon = icon("github"),
                       onclick ="window.open('https://github.com/petergandenberger/dashboard-builder', '_blank')",
                       style = "width: 100%; margin-top: 10px;")
-       ),
-       shinydashboardPlus::box(
-         title = "Documentation",
-         width = 4,
-         status = "warning",
-         "Check out the Documentation and Tutorials.",
-         br(),
-         actionButton("documentation", "Documentation", icon = icon("book"),
-                      onclick ="window.open('https://github.com/petergandenberger/dashboard-builder', '_blank')",
-                      style = "width: 100%; margin-top: 10px;")
-      )
+       )
   )
 }

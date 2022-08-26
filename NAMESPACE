@@ -2,6 +2,7 @@
 
 export(run_app)
 import(bs4Dash)
+import(checkmate)
 import(cicerone)
 import(datamods)
 import(ggplot2)

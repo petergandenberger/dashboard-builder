@@ -5,7 +5,7 @@
 #' @return The return value, if any, from executing the utility.
 #'
 #' @noRd
-export_dashboard <- function(input, st, saved_layout, data) {
+export_dashboard <- function(st, saved_layout, data) {
   saveRDS(data, "out/data.RDS")
 
   file <- create_appR_file(st, saved_layout)

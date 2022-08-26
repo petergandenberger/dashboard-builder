@@ -37,18 +37,31 @@
 }
 
 
-#right_sidebar .action-button {
+#right_sidebar .action-button, #right_sidebar .btn-file{
   background: transparent;
   border: none;
   color: white;
   padding-left: 0px;
 }
 
-#right_sidebar li:hover .action-button {
+#right_sidebar li:hover .action-button, #right_sidebar li:hover .btn-file {
   transition: 0.5s all;
   color: #2f89fc;
 }
 
+#load_dashboard .input-group label, #load_dashboard .input-group input{
+  float: left;
+  width: 100%;
+}
+#load_dashboard .input-group input{
+  background: #2A3942;
+  border-color: #2A3942;
+  color: #c4c4c4;
+}
+
+#load_dashboard .progress-bar {
+  background-color: #002952;
+}
 /*--------------------------------------------------------------
 	Element Builder Modal
 --------------------------------------------------------------*/
