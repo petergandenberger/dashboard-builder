@@ -22,10 +22,7 @@ dashboardBuilder::run_app()
 There is a [demo available on shinyapps.io](https://pega.shinyapps.io/dashboard-builder/).
 
 ## gridstackeR
-To run the exported dashboards you need to install the gridstackeR package.
-``` r
-devtools::install_github("https://github.com/petergandenberger/gridstackeR")
-```
+The exported dashboards use the gridstackeR package. You can check out the [project here](https://github.com/petergandenberger/gridstackeR)
 
 ## Workflow
 There are four steps in creating shiny apps with the dashboard builder
