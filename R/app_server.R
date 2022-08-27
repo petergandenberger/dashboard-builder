@@ -78,7 +78,7 @@ app_server <- function(input, output, session) {
   observeEvent(input[[paste0(grid_id, "_saved_layout")]], {
     saved_layout <- input[[paste0(grid_id, "_saved_layout")]]
     if(saved_layout != "[]" & length(st$list()) > 0) {
-      elements <- lapply(st$list(), FUN = function(key){st$get(key)})
+      elements <- st$mget(st$list())
       saved_dashboard <- list(elements = elements, layout = saved_layout, data = data$data(), data_name = data$name())
       saveRDS(saved_dashboard, "out/saved_dashboard.RDS")
       shinyjs::click("downloadSavedDashboard")
