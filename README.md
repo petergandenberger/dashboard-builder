@@ -6,7 +6,8 @@
 
 The Dashboard-Builder helps you to create Shiny-Dashboards without writing any code.
 
-![dashboard-builder](https://user-images.githubusercontent.com/22965104/185766614-cecf6c8b-9820-4aed-b288-0ee11861c28a.png)
+![dashboard-builder](https://user-images.githubusercontent.com/22965104/186987442-bca48b8e-4a45-4e09-8765-d58b18bf812c.png)
+
 
 The dashboard-builder is still in development. If you have any questions or feedback please don't hesitate to reach out to me via email or github.
 
