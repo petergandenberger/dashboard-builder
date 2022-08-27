@@ -4,10 +4,10 @@ username:
 account: pega
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 5945062
-bundleId: 6221475
+appId: 6858092
+bundleId: 6242039
 url: https://pega.shinyapps.io/dashboard-builder/
-when: 1661031833.22501
-lastSyncTime: 1661031833.22501
+when: 1661546014.48329
+lastSyncTime: 1661546014.4833
 asMultiple: FALSE
 asStatic: FALSE

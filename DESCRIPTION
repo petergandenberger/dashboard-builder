@@ -7,6 +7,7 @@ Description: Build shiny apps without writing code.
 License: MIT + file LICENSE
 Imports: 
     bs4Dash,
+    checkmate,
     cicerone,
     config (>= 0.3.1),
     datamods,
@@ -15,10 +16,11 @@ Imports:
     esquisse,
     ggplot2,
     golem (>= 0.3.3),
-    gridstackeR (>= 0.1.0),
+    gridstackeR (>= 0.1.1),
     jsonify,
     pkgload,
     R6,
+    readtext,
     shiny (>= 1.7.1),
     shinyalert,
     shinydashboardPlus,
