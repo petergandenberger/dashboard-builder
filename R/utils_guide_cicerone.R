@@ -43,7 +43,7 @@ create_guide <- function() {
     step(
       el = "sidebar_dashboard",
       title = "Save Dashboard",
-      description = "You can save and load dashbards to continue working on them at a later date or share them with frinds and coworkers.",
+      description = "You can save and load dashbards to continue working on them at a later date or share them with friends and coworkers.",
       position = "left"
     )
   return(guide)
