@@ -22,13 +22,20 @@ GGPlotElementBuilder <- R6::R6Class("GGPlotElementBuilder",
     },
 
     load_element = function(dashboardBuilderElement, session) {
-      # set slider to saved number
-      private$.dashboardBuilderElement <- dashboardBuilderElement
-      #TODO
+      if(is.null(dashboardBuilderElement)) {
+        private$.dashboardBuilderElement <- NULL
+      } else {
+        private$.dashboardBuilderElement <- dashboardBuilderElement
+        #TODO
+      }
     },
 
     build_element = function (input, ns) {
       code_element <- private$ggplot_results$code_plot
+
+      if(is.null(code_element)) {
+        return(NULL)
+      }
 
       if(is.null(private$.dashboardBuilderElement)) {
         element_name <- paste0("plot_", round(runif(1) * 10000000, 0))

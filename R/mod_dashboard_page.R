@@ -51,6 +51,7 @@ mod_dashboard_page_server <- function(id, data, triggers_dashboard_page){
 
     observe({
       req(element_new)
+      req(!is.null(element_new()$element_name))
       # check if element already exists
       if(!st$exists(element_new()$element_name)) {
         element_render_ui(element_new(), ns)

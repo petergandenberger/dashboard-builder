@@ -18,10 +18,13 @@ DataTableElementBuilder <- R6::R6Class("DataTableElementBuilder",
     },
 
     load_element = function(dashboardBuilderElement, session) {
-      # set slider to saved number
-      private$.dashboardBuilderElement <- dashboardBuilderElement
-      updateSelectInput(session, "dataTableElementBuilder_vars", "Select vars for the Columns",
-                        names(private$dataset), selected = dashboardBuilderElement$inner_state$vars)
+      if(is.null(dashboardBuilderElement)) {
+        private$.dashboardBuilderElement <- NULL
+      } else {
+        private$.dashboardBuilderElement <- dashboardBuilderElement
+        updateSelectInput(session, "dataTableElementBuilder_vars", "Select vars for the Columns",
+                          names(private$dataset), selected = dashboardBuilderElement$inner_state$vars)
+      }
     },
 
     build_element = function (input, ns) {

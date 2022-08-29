@@ -22,19 +22,21 @@ mod_element_builder_server <- function(id, elementBuilder_list, trigger, st, ns_
 
     observe({
       req(trigger$add_element)
-
       if(is.null(elementBuilder_list())) {
         shinyalert("No Dataset available", "Please add some data first!", type = "error")
       } else {
         if(trigger$add_element == -1) {
-          elementBuilder_list_new <- elementBuilder_list
+          elementBuilder_list_new <- elementBuilder_list()
+          for(elementBuilder in elementBuilder_list_new) {
+            elementBuilder$load_element(NULL, session)
+          }
+          elementBuilder_list_new <- elementBuilder_list_new
         } else {
           current_element <- st$get(trigger$add_element)
-            elementBuilder_list_edited <- function(){NULL}
             for(elementBuilder in elementBuilder_list()) {
              if(class(elementBuilder)[1] == current_element$builder_class) {
                elementBuilder$load_element(current_element, session)
-               elementBuilder_list_new <- function(){list(elementBuilder)}
+               elementBuilder_list_new <- list(elementBuilder)
                break
              }
            }
@@ -42,8 +44,8 @@ mod_element_builder_server <- function(id, elementBuilder_list, trigger, st, ns_
 
         showModal(element_builder_modal(elementBuilder_list_new, ns))
         # select the first tab
-        updateTabsetPanel(session, inputId = "tabset1", elementBuilder_list_new()[[1]]$elementBuilder_name)
-        current_element <- elementBuilder_list_new()[[1]]$dashboardBuilderElement
+        updateTabsetPanel(session, inputId = "tabset1", elementBuilder_list_new[[1]]$elementBuilder_name)
+        current_element <- elementBuilder_list_new[[1]]$dashboardBuilderElement
         if(!is.null(current_element)) {
           updateTextInput(session, "element_name", "Element Name", current_element$display_name)
         }

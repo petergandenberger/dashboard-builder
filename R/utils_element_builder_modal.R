@@ -7,7 +7,7 @@
 #'
 #' @noRd
 element_builder_modal <- function(elementBuilder_list, ns) {
-  tabs <- lapply(elementBuilder_list(), FUN = function(elementBuilder) {
+  tabs <- lapply(elementBuilder_list, FUN = function(elementBuilder) {
     tabPanel(title = elementBuilder$elementBuilder_name,
              elementBuilder$get_builder_UI(ns))
   })

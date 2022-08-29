@@ -15,12 +15,15 @@ ValueboxElementBuilder <- R6::R6Class("ValueboxElementBuilder",
     },
 
     load_element = function(dashboardBuilderElement, session) {
-      # set slider to saved number
-      private$.dashboardBuilderElement <- dashboardBuilderElement
-      updateTextInput(session, "valueboxElementBuilder_title", "Title",
-                      dashboardBuilderElement$inner_state$valueboxElementBuilder_title)
-      updateNumericInput(session, "valueboxElementBuilder_value", "Value",
-                         dashboardBuilderElement$inner_state$valueboxElementBuilder_value)
+      if(is.null(dashboardBuilderElement)) {
+        private$.dashboardBuilderElement <- NULL
+      } else {
+        private$.dashboardBuilderElement <- dashboardBuilderElement
+        updateTextInput(session, "valueboxElementBuilder_title", "Title",
+                        dashboardBuilderElement$inner_state$valueboxElementBuilder_title)
+        updateNumericInput(session, "valueboxElementBuilder_value", "Value",
+                           dashboardBuilderElement$inner_state$valueboxElementBuilder_value)
+      }
     },
 
     build_element = function (input, ns) {
