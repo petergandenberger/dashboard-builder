@@ -1,4 +1,4 @@
-url: ~
+url: https://petergandenberger.github.io/dashboard-builder
 template:
   bootstrap: 5
   bootswatch: lux

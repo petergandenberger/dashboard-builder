@@ -6,6 +6,8 @@ output: github_document
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Travis build status](https://travis-ci.com/petergandenberger/dashboard-builder.svg?branch=master)](https://travis-ci.com/petergandenberger/dashboard-builder)
+[![R-CMD-check](https://github.com/petergandenberger/dashboard-builder/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/petergandenberger/dashboard-builder/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The dashboard-builder is still in development. If you have any questions or feedback please don't hesitate to reach out to me via email or github.
