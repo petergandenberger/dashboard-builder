@@ -1,0 +1,15 @@
+pandoc: 2.14.2
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  code: code.html
+  save_load: save_load.html
+  step1_data: step1_data.html
+  step2_createElements: step2_createElements.html
+  step3_export: step3_export.html
+  step4_extend: step4_extend.html
+last_built: 2022-09-16T11:18Z
+urls:
+  reference: https://petergandenberger.github.io/dashboard-builder/reference
+  article: https://petergandenberger.github.io/dashboard-builder/articles
+
