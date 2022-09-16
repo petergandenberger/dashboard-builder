@@ -1,0 +1,27 @@
+---
+title: "Step 2: Create Elements"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Step 2: Create Elements}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In this article, we explain the second step, how to create and edit elements.
+
+<img style="float: right; margin-left: 10px;" src="res/steps_edit.png">
+In the right sidebar you can find the "Add Element" and "Add Filter" buttons.
+
+Clicking on *Add Element* opens the ** displayed below.
+
+<br>
+<img style="float: left; margin-right: 10px;" src="res/builder_table.png">
+
+Once you have finished creating your dashboard you can continue with [Step 3: Export](step3_export.html)

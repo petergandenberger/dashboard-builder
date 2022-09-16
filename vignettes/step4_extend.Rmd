@@ -1,0 +1,17 @@
+---
+title: "Step 4: Extend"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Step 4: Extend}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In this article, we explain the fourth step, how to extend the dashboard after exporting it.

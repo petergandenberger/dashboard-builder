@@ -1,0 +1,17 @@
+---
+title: "Code Viewer"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Code Viewer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In this article, we explain the code viewer.

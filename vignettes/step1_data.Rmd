@@ -1,0 +1,29 @@
+---
+title: "Step 1: Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Step 1: Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+In this article, we explain the first step, how to add data to the Dashboard-Builder.
+
+<img style="float: right; margin-left: 10px;" src="res/steps_data.png">
+In the right sidebar you can find the "Import Data" button and a textbox showing you the name of the current dataset.
+
+Clicking on *Import Data* opens the *Data Import Dialogue* displayed below.
+
+<br>
+<img style="float: left; margin-right: 10px;" src="res/load_data.png">
+
+You can import data from the current R-Environment, Google Sheets, and load external files like *.csv*, *.xlsx*, etc.
+
+
+Once you have loaded your dataset you can continue with [Step 2: Create Elements](step2_createElements.html)

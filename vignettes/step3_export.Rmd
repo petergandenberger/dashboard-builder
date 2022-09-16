@@ -1,0 +1,17 @@
+---
+title: "Step 3: Export"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Step 3: Export}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In this article, we explain the third step, how to export the Dashboard.
