@@ -17,7 +17,7 @@ app_ui <- function(request) {
                 actionLink("github_header", label = "", icon = icon("github"), style = "float:right;",
                            onclick ="window.open('https://github.com/petergandenberger/dashboard-builder', '_blank')"),
                 actionLink("documentation_header", label = "", icon = icon("book"), style = "float:right;",
-                           onclick ="window.open('https://github.com/petergandenberger/dashboard-builder', '_blank')"),
+                           onclick ="window.open('https://petergandenberger.github.io/dashboard-builder/', '_blank')"),
                 actionLink("guide_header", label = "", icon = icon("question"), style = "float:right;")
         )
       ),
